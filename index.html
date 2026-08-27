@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lucky Spin - Demo</title>
+<title>Lucky Spin</title>
 
 <style>
 * {
@@ -12,265 +12,467 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #090914;
+  background: #090b20;
   color: white;
-  text-align: center;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
-header {
-  padding: 20px;
-  background: #111122;
-  color: #ffd43b;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.container {
-  max-width: 500px;
-  margin: auto;
-  padding: 25px 18px;
-}
-
-h1 {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  color: #ccc;
-  margin-bottom: 25px;
-}
-
-.saldo {
-  background: #17172d;
-  border-radius: 15px;
-  padding: 15px;
-  margin-bottom: 20px;
-  font-size: 20px;
-}
-
-#saldo {
-  color: #ffd43b;
-  font-weight: bold;
-}
-
-.slot {
+.top {
+  background: linear-gradient(#292b55, #11132d);
+  padding: 12px;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 25px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffd83d;
+}
+
+.balance {
+  background: #171936;
+  border: 2px solid #d8a928;
+  border-radius: 20px;
+  padding: 7px 14px;
+  color: #ffd83d;
+  font-weight: bold;
+}
+
+.game {
+  max-width: 650px;
+  margin: auto;
+  padding: 15px;
+}
+
+.title {
+  text-align: center;
+  font-size: 28px;
+  color: #ffd83d;
+  margin: 15px 0;
+}
+
+.machine {
+  padding: 15px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #31106e, #120c38);
+  border: 4px solid #d5a92e;
+  box-shadow: 0 0 25px #000;
+}
+
+.reels {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  background: #09091b;
+  padding: 7px;
+  border-radius: 10px;
 }
 
 .reel {
-  width: 100px;
-  height: 110px;
+  height: 105px;
+  background: linear-gradient(#241c57, #100d2d);
+  border: 2px solid #7051c8;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: white;
-  color: black;
-  border-radius: 15px;
-  font-size: 55px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.4);
+  align-items: center;
+  font-size: 43px;
+  border-radius: 7px;
+}
+
+.spinning {
+  animation: shake .12s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translateY(-4px); }
+  50% { transform: translateY(4px); }
+  100% { transform: translateY(-4px); }
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.control {
+  background: #171936;
+  border: 2px solid #6254a5;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  flex: 1;
+}
+
+.control small {
+  display: block;
+  color: #aaa;
+}
+
+.control strong {
+  color: #ffd83d;
+  font-size: 18px;
 }
 
 button {
   border: none;
-  border-radius: 12px;
-  padding: 15px 30px;
-  font-size: 20px;
-  font-weight: bold;
   cursor: pointer;
+  font-weight: bold;
 }
 
-#spinBtn {
-  background: #ffd43b;
-  color: #111;
+.minus,
+.plus {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #d5a92e;
+  font-size: 20px;
 }
 
-#spinBtn:disabled {
+.spin {
+  margin-top: 15px;
+  width: 100%;
+  padding: 17px;
+  border-radius: 15px;
+  background: linear-gradient(#ffe75a, #e5a91c);
+  color: #17120a;
+  font-size: 25px;
+  box-shadow: 0 5px 0 #8d6410;
+}
+
+.spin:disabled {
   opacity: .5;
 }
 
-#resetBtn {
+.reset {
   margin-top: 12px;
-  background: #33334d;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background: #292944;
   color: white;
-  font-size: 16px;
 }
 
-#hasil {
+.result {
+  text-align: center;
   min-height: 35px;
-  margin: 20px 0;
+  margin: 18px 0 5px;
   font-size: 20px;
   font-weight: bold;
 }
 
-.info {
-  margin-top: 30px;
-  background: #141426;
-  border-radius: 15px;
-  padding: 18px;
-  text-align: left;
+.paytable {
+  margin-top: 20px;
+  background: #11132c;
+  padding: 15px;
+  border-radius: 12px;
 }
 
-.info h2 {
+.paytable h2 {
   margin-top: 0;
+  color: #ffd83d;
 }
 
-ul {
-  padding-left: 22px;
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #29294a;
 }
 
-footer {
+.note {
+  text-align: center;
   color: #888;
-  padding: 30px 10px;
+  font-size: 12px;
+  margin: 20px 0;
 }
 </style>
 </head>
 
 <body>
 
-<header>LUCKY SPIN</header>
+<div class="top">
+  <div class="logo">🎰 LUCKY SPIN</div>
+  <div class="balance">
+    💰 <span id="balance">10000</span>
+  </div>
+</div>
 
-<div class="container">
+<div class="game">
 
-  <h1>🎰 Lucky Spin</h1>
-  <p class="subtitle">Game slot demo dengan poin virtual</p>
+  <div class="title">LUCKY SPIN</div>
 
-  <div class="saldo">
-    💰 Poin:
-    <span id="saldo">1000</span>
+  <div class="machine">
+
+    <div class="reels">
+      <div class="reel" id="r1">🍒</div>
+      <div class="reel" id="r2">💎</div>
+      <div class="reel" id="r3">7️⃣</div>
+      <div class="reel" id="r4">🍋</div>
+      <div class="reel" id="r5">🔔</div>
+    </div>
+
+    <div class="controls">
+
+      <button class="minus" onclick="ubahBet(-10)">−</button>
+
+      <div class="control">
+        <small>BET</small>
+        <strong id="bet">100</strong>
+      </div>
+
+      <button class="plus" onclick="ubahBet(10)">+</button>
+
+      <div class="control">
+        <small>WIN</small>
+        <strong id="win">0</strong>
+      </div>
+
+    </div>
+
+    <button class="spin" id="spinButton" onclick="spin()">
+      SPIN 🎰
+    </button>
+
+    <button class="reset" onclick="resetGame()">
+      RESET DEMO
+    </button>
+
+    <div class="result" id="result">
+      Tekan SPIN untuk bermain!
+    </div>
+
   </div>
 
-  <div class="slot">
-    <div class="reel" id="reel1">🍒</div>
-    <div class="reel" id="reel2">💎</div>
-    <div class="reel" id="reel3">⭐</div>
+  <div class="paytable">
+
+    <h2>🏆 PAYTABLE DEMO</h2>
+
+    <div class="row">
+      <span>7️⃣ 7️⃣ 7️⃣</span>
+      <strong>× 50</strong>
+    </div>
+
+    <div class="row">
+      <span>💎 💎 💎</span>
+      <strong>× 25</strong>
+    </div>
+
+    <div class="row">
+      <span>⭐ ⭐ ⭐</span>
+      <strong>× 15</strong>
+    </div>
+
+    <div class="row">
+      <span>🍒 🍒 🍒</span>
+      <strong>× 10</strong>
+    </div>
+
+    <div class="row">
+      <span>🍋 🍋 🍋</span>
+      <strong>× 8</strong>
+    </div>
+
+    <div class="row">
+      <span>🔔 🔔 🔔</span>
+      <strong>× 5</strong>
+    </div>
+
   </div>
 
-  <p>Biaya 1 putaran: <b>10 poin</b></p>
-
-  <button id="spinBtn" onclick="spin()">PUTAR 🎰</button>
-  <br>
-  <button id="resetBtn" onclick="resetGame()">RESET GAME</button>
-
-  <div id="hasil">Tekan PUTAR untuk mulai!</div>
-
-  <div class="info">
-    <h2>🏆 Hadiah Demo</h2>
-    <ul>
-      <li>🍒🍒🍒 = +100 poin</li>
-      <li>💎💎💎 = +250 poin</li>
-      <li>⭐⭐⭐ = +500 poin</li>
-      <li>🍀🍀🍀 = +150 poin</li>
-      <li>7️⃣7️⃣7️⃣ = +1000 poin</li>
-      <li>Selain itu = tidak menang</li>
-    </ul>
+  <div class="note">
+    Lucky Spin adalah game demo menggunakan poin virtual.
   </div>
 
 </div>
 
-<footer>
-  Lucky Spin — Demo game dengan poin virtual
-</footer>
-
 <script>
-const symbols = ["🍒", "💎", "⭐", "🍀", "7️⃣"];
 
-let saldo = 1000;
-let sedangSpin = false;
+const symbols = [
+  "🍒",
+  "🍋",
+  "🔔",
+  "💎",
+  "⭐",
+  "🍀",
+  "7️⃣"
+];
 
-const reel1 = document.getElementById("reel1");
-const reel2 = document.getElementById("reel2");
-const reel3 = document.getElementById("reel3");
-const saldoText = document.getElementById("saldo");
-const hasil = document.getElementById("hasil");
-const spinBtn = document.getElementById("spinBtn");
+let balance = 10000;
+let bet = 100;
+let spinning = false;
 
-function updateSaldo() {
-  saldoText.textContent = saldo;
-}
+const reels = [
+  document.getElementById("r1"),
+  document.getElementById("r2"),
+  document.getElementById("r3"),
+  document.getElementById("r4"),
+  document.getElementById("r5")
+];
 
 function randomSymbol() {
   return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-function spin() {
-  if (sedangSpin) return;
+function updateScreen() {
+  document.getElementById("balance").textContent = balance;
+  document.getElementById("bet").textContent = bet;
+}
 
-  if (saldo < 10) {
-    hasil.textContent = "❌ Poin tidak cukup. Tekan RESET GAME.";
+function ubahBet(jumlah) {
+
+  if (spinning) return;
+
+  bet += jumlah;
+
+  if (bet < 10) bet = 10;
+  if (bet > 1000) bet = 1000;
+
+  updateScreen();
+}
+
+function spin() {
+
+  if (spinning) return;
+
+  if (balance < bet) {
+    document.getElementById("result").textContent =
+      "❌ Poin virtual tidak cukup.";
     return;
   }
 
-  sedangSpin = true;
-  spinBtn.disabled = true;
+  spinning = true;
 
-  saldo -= 10;
-  updateSaldo();
+  balance -= bet;
+  updateScreen();
 
-  hasil.textContent = "🎰 Memutar...";
+  document.getElementById("win").textContent = "0";
+
+  const button = document.getElementById("spinButton");
+  button.disabled = true;
+
+  reels.forEach(reel => {
+    reel.classList.add("spinning");
+  });
+
+  document.getElementById("result").textContent =
+    "🎰 Gulungan berputar...";
 
   let counter = 0;
 
-  const animasi = setInterval(() => {
-    reel1.textContent = randomSymbol();
-    reel2.textContent = randomSymbol();
-    reel3.textContent = randomSymbol();
+  const animation = setInterval(() => {
+
+    reels.forEach(reel => {
+      reel.textContent = randomSymbol();
+    });
 
     counter++;
 
-    if (counter >= 15) {
-      clearInterval(animasi);
+    if (counter >= 20) {
+
+      clearInterval(animation);
+
+      reels.forEach(reel => {
+        reel.classList.remove("spinning");
+      });
+
       selesaiSpin();
     }
+
   }, 100);
 }
 
 function selesaiSpin() {
-  const a = randomSymbol();
-  const b = randomSymbol();
-  const c = randomSymbol();
 
-  reel1.textContent = a;
-  reel2.textContent = b;
-  reel3.textContent = c;
+  const hasil = [];
 
-  let hadiah = 0;
+  reels.forEach(reel => {
+    const symbol = randomSymbol();
+    reel.textContent = symbol;
+    hasil.push(symbol);
+  });
 
-  if (a === b && b === c) {
-    if (a === "🍒") hadiah = 100;
-    else if (a === "💎") hadiah = 250;
-    else if (a === "⭐") hadiah = 500;
-    else if (a === "🍀") hadiah = 150;
-    else if (a === "7️⃣") hadiah = 1000;
+  let multiplier = 0;
+
+  // 5 simbol sama
+  if (hasil.every(x => x === hasil[0])) {
+
+    if (hasil[0] === "7️⃣") {
+      multiplier = 50;
+    } else if (hasil[0] === "💎") {
+      multiplier = 25;
+    } else if (hasil[0] === "⭐") {
+      multiplier = 15;
+    } else if (hasil[0] === "🍒") {
+      multiplier = 10;
+    } else if (hasil[0] === "🍋") {
+      multiplier = 8;
+    } else if (hasil[0] === "🔔") {
+      multiplier = 5;
+    } else {
+      multiplier = 3;
+    }
   }
 
-  if (hadiah > 0) {
-    saldo += hadiah;
-    hasil.textContent = "🎉 MENANG! +" + hadiah + " poin!";
+  // 3 simbol pertama sama
+  else if (
+    hasil[0] === hasil[1] &&
+    hasil[1] === hasil[2]
+  ) {
+    multiplier = 3;
+  }
+
+  const win = bet * multiplier;
+
+  if (win > 0) {
+
+    balance += win;
+
+    document.getElementById("win").textContent = win;
+
+    document.getElementById("result").textContent =
+      "🎉 MENANG! +" + win + " poin!";
+
   } else {
-    hasil.textContent = "😅 Belum beruntung. Coba lagi!";
+
+    document.getElementById("win").textContent = "0";
+
+    document.getElementById("result").textContent =
+      "😅 Belum menang. Coba lagi!";
   }
 
-  updateSaldo();
+  updateScreen();
 
-  sedangSpin = false;
-  spinBtn.disabled = false;
+  spinning = false;
+
+  document.getElementById("spinButton").disabled = false;
 }
 
 function resetGame() {
-  saldo = 1000;
 
-  reel1.textContent = "🍒";
-  reel2.textContent = "💎";
-  reel3.textContent = "⭐";
+  balance = 10000;
+  bet = 100;
 
-  hasil.textContent = "Game direset. Selamat bermain!";
-  updateSaldo();
+  reels[0].textContent = "🍒";
+  reels[1].textContent = "💎";
+  reels[2].textContent = "7️⃣";
+  reels[3].textContent = "🍋";
+  reels[4].textContent = "🔔";
+
+  document.getElementById("win").textContent = "0";
+
+  document.getElementById("result").textContent =
+    "Game demo direset!";
+
+  updateScreen();
 }
+
+updateScreen();
+
 </script>
 
 </body>
