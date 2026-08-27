@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucky Spin - Game Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #080914;
+      color: white;
+    }
+
+    header {
+      padding: 18px 7%;
+      background: #111221;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ffd43b;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #160b35, #37106b);
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .spin {
+      background: #ffd43b;
+      border: none;
+      padding: 15px 35px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .games {
+      padding: 40px 7%;
+    }
+
+    .games h2 {
+      margin-bottom: 25px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .card {
+      padding: 35px 10px;
+      text-align: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #32115c, #171936);
+      font-size: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #aaa;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">LUCKY SPIN</div>
+
+    <nav>
+      <a href="#">Beranda</a>
+      <a href="#">Game</a>
+      <a href="#">Promo</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>LUCKY SPIN 🎰</h1>
+    <p>Game spin demo dengan poin virtual</p>
+    <button class="spin" onclick="spin()">PUTAR SEKARANG</button>
+
+    <h2 id="result" style="margin-top:30px;">🎁 Siap bermain?</h2>
+  </section>
+
+  <section class="games">
+    <h2>Game Demo</h2>
+
+    <div class="cards">
+      <div class="card">🍒<br>Cherry Spin</div>
+      <div class="card">💎<br>Diamond Spin</div>
+      <div class="card">🍀<br>Lucky Clover</div>
+      <div class="card">⭐<br>Star Spin</div>
+    </div>
+  </section>
+
+  <footer>
+    Lucky Spin — Demo game dengan poin virtual
+  </footer>
+
+  <script>
+    function spin() {
+      const hadiah = [
+        "🍒 CHERRY!",
+        "💎 DIAMOND!",
+        "🍀 LUCKY!",
+        "⭐ JACKPOT DEMO!",
+        "🎁 BONUS!"
+      ];
+
+      const hasil = hadiah[Math.floor(Math.random() * hadiah.length)];
+
+      document.getElementById("result").textContent = hasil;
+    }
+  </script>
+
+</body>
+</html>
