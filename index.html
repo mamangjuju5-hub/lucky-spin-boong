@@ -3,317 +3,387 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Lucky Spin Demo</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:#090714;
+  color:white;
+  font-family:Arial,sans-serif;
 }
 
-body {
-  margin: 0;
-  background: #090714;
-  color: white;
-  font-family: Arial, sans-serif;
+header{
+  text-align:center;
+  padding:15px;
+  background:linear-gradient(135deg,#27104f,#120a28);
+  border-bottom:2px solid #ffd43b;
 }
 
-.wrap {
-  max-width: 520px;
-  margin: auto;
-  padding: 18px;
+.logo{
+  color:#ffd43b;
+  font-size:27px;
+  font-weight:bold;
 }
 
-h1 {
-  text-align: center;
-  color: #ffd43b;
-  margin-bottom: 18px;
+.container{
+  max-width:520px;
+  margin:auto;
+  padding:15px;
 }
 
-.card {
-  background: #17102d;
-  border: 1px solid #382365;
-  border-radius: 18px;
-  padding: 16px;
-  margin-bottom: 14px;
+.card{
+  background:#17102d;
+  border:1px solid #40266d;
+  border-radius:18px;
+  padding:15px;
+  margin-top:15px;
 }
 
-.balance {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 18px;
+.balance{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:18px;
 }
 
-.balance b {
-  color: #ffd43b;
+.balance span{
+  color:#aaa;
 }
 
-/* REEL */
-.reels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 7px;
-  background: #2b1257;
-  padding: 10px;
-  border-radius: 16px;
+.balance strong{
+  color:#ffd43b;
+  font-size:21px;
 }
 
-.cell {
-  height: 82px;
-  background: #120b22;
-  border-radius: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 42px;
+.reels{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  background:#2c1457;
+  padding:10px;
+  border-radius:15px;
 }
 
-/* INPUT */
-.controls {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+.cell{
+  height:90px;
+  background:linear-gradient(#17112c,#0d0919);
+  border:2px solid #6844a5;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:43px;
 }
 
-label {
-  font-size: 13px;
-  color: #bbb;
+.spin-animation{
+  animation:shake .1s infinite;
 }
 
-input {
-  width: 100%;
-  padding: 12px;
-
-  border-radius: 10px;
-  border: 1px solid #493477;
-
-  background: #0d0918;
-  color: white;
-
-  font-size: 16px;
-  margin-top: 5px;
+@keyframes shake{
+  0%{transform:translateY(-5px)}
+  50%{transform:translateY(5px)}
+  100%{transform:translateY(-5px)}
 }
 
-/* BUTTON */
-button {
-  border: 0;
-  border-radius: 12px;
-  padding: 13px;
-
-  font-weight: bold;
-  font-size: 16px;
-
-  cursor: pointer;
+.result{
+  text-align:center;
+  min-height:30px;
+  margin-top:15px;
+  color:#ffd43b;
+  font-size:18px;
+  font-weight:bold;
 }
 
-#spin {
-  background: #ffd43b;
-  color: #17100d;
+.settings{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-.secondary {
-  background: #3a2464;
-  color: white;
+label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  margin-bottom:5px;
 }
 
-.danger {
-  background: #8e2341;
-  color: white;
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #51377c;
+  background:#0c0817;
+  color:white;
+  font-size:16px;
 }
 
-.actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-
-  margin-top: 12px;
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
 }
 
-.result {
-  text-align: center;
-  min-height: 26px;
-
-  color: #ffd43b;
-  font-weight: bold;
-
-  margin-top: 12px;
+button{
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
 }
 
-.status {
-  text-align: center;
-  margin-top: 10px;
-  color: #9fe3a6;
+#spin{
+  background:linear-gradient(#ffe85b,#e6aa20);
+  color:#18120a;
+  font-size:20px;
 }
 
-.small {
-  color: #aaa;
-  font-size: 12px;
-  line-height: 1.5;
+#auto{
+  background:#493078;
+  color:white;
+}
+
+#music{
+  width:100%;
+  margin-top:10px;
+  background:#235b65;
+  color:white;
+}
+
+#reset{
+  width:100%;
+  margin-top:10px;
+  background:#86243f;
+  color:white;
+}
+
+.status{
+  text-align:center;
+  color:#9ee7a5;
+  font-size:13px;
+  margin-top:10px;
+}
+
+.paytable h2{
+  color:#ffd43b;
+  text-align:center;
+}
+
+.pay{
+  display:flex;
+  justify-content:space-between;
+  padding:9px 0;
+  border-bottom:1px solid #30234a;
+}
+
+.pay b{
+  color:#ffd43b;
+}
+
+.scatter{
+  color:#ff66d9;
+}
+
+.note{
+  color:#888;
+  text-align:center;
+  font-size:12px;
+  line-height:1.5;
 }
 </style>
 </head>
 
 <body>
 
-<div class="wrap">
+<!-- MUSIK -->
+<audio id="bgMusic" loop>
+  <source src="musik.mp3" type="audio/mpeg">
+</audio>
 
-<h1>🎰 LUCKY SPIN DEMO</h1>
+<header>
+  <div class="logo">🎰 LUCKY SPIN</div>
+</header>
 
-<!-- SALDO -->
-<div class="card balance">
-  <span>Saldo Virtual</span>
-  <b id="balance">100.000</b>
-</div>
+<div class="container">
 
-<!-- SLOT -->
-<div class="card">
-
-  <div class="reels" id="reels">
-
-    <div class="cell">🍒</div>
-    <div class="cell">💎</div>
-    <div class="cell">⭐</div>
-
-    <div class="cell">7️⃣</div>
-    <div class="cell">🔔</div>
-    <div class="cell">🍀</div>
-
-    <div class="cell">🍋</div>
-    <div class="cell">🍇</div>
-    <div class="cell">🎁</div>
-
+  <div class="card balance">
+    <span>💰 Saldo Virtual</span>
+    <strong id="balance">1.000.000</strong>
   </div>
 
-  <div class="result" id="result">
-    Tekan SPIN untuk bermain
-  </div>
+  <div class="card">
 
-</div>
+    <div class="reels">
 
-<!-- PENGATURAN -->
-<div class="card">
+      <div class="cell">🍒</div>
+      <div class="cell">💎</div>
+      <div class="cell">⭐</div>
 
-  <div class="controls">
+      <div class="cell">7️⃣</div>
+      <div class="cell">🎯</div>
+      <div class="cell">🔔</div>
 
-    <div>
-
-      <label>
-        Taruhan per spin
-      </label>
-
-      <input
-        id="bet"
-        type="number"
-        min="100"
-        step="100"
-        value="1000"
-      >
+      <div class="cell">🍀</div>
+      <div class="cell">🎁</div>
+      <div class="cell">🍋</div>
 
     </div>
 
-
-    <div>
-
-      <label>
-        Budget sesi
-      </label>
-
-      <input
-        id="budget"
-        type="number"
-        min="100"
-        step="100"
-        value="10000"
-      >
-
+    <div class="result" id="result">
+      Tekan SPIN untuk bermain!
     </div>
 
   </div>
 
+  <div class="card">
 
-  <div class="actions">
+    <div class="settings">
 
-    <button id="spin">
-      SPIN
+      <div>
+        <label>BET / Spin</label>
+        <input
+          id="bet"
+          type="number"
+          min="100"
+          step="100"
+          value="1000">
+      </div>
+
+      <div>
+        <label>Budget Sesi</label>
+        <input
+          id="budget"
+          type="number"
+          min="100"
+          step="100"
+          value="100000">
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button id="spin">
+        SPIN 🎰
+      </button>
+
+      <button id="auto">
+        AUTO SPIN: OFF
+      </button>
+
+    </div>
+
+    <!-- TOMBOL MUSIK -->
+    <button id="music">
+      🔊 MUSIK ON
     </button>
 
-    <button
-      class="secondary"
-      id="auto"
-    >
-      AUTO SPIN: OFF
+    <button id="reset">
+      RESET SALDO
     </button>
+
+    <div class="status" id="status"></div>
 
   </div>
 
+  <div class="card paytable">
 
-  <button
-    class="danger"
-    id="reset"
-    style="width:100%;margin-top:10px"
-  >
-    RESET SALDO
-  </button>
+    <h2>🏆 PAYTABLE DEMO</h2>
 
+    <div class="pay">
+      <span>🍒 🍒 🍒</span>
+      <b>× 3</b>
+    </div>
 
-  <div
-    class="status"
-    id="status"
-  ></div>
+    <div class="pay">
+      <span>🍀 🍀 🍀</span>
+      <b>× 15</b>
+    </div>
+
+    <div class="pay">
+      <span>⭐ ⭐ ⭐</span>
+      <b>× 25</b>
+    </div>
+
+    <div class="pay">
+      <span>💎 💎 💎</span>
+      <b>× 50</b>
+    </div>
+
+    <div class="pay">
+      <span>7️⃣ 7️⃣ 7️⃣</span>
+      <b>× 100</b>
+    </div>
+
+    <div class="pay">
+      <span>🎁 🎁 🎁</span>
+      <b>× 200</b>
+    </div>
+
+    <div class="pay">
+      <span class="scatter">🎯 SCATTER</span>
+      <b>+500</b>
+    </div>
+
+    <div class="pay">
+      <span class="scatter">🎯 🎯</span>
+      <b>+5.000</b>
+    </div>
+
+    <div class="pay">
+      <span class="scatter">🎯 🎯 🎯</span>
+      <b>+50.000</b>
+    </div>
+
+  </div>
+
+  <div class="card note">
+    Lucky Spin adalah game demo menggunakan poin virtual.
+    Tidak menggunakan uang asli, deposit, penarikan,
+    atau hadiah uang.
+  </div>
 
 </div>
-
-
-<div class="card small">
-
-  Ini hanya game demo dengan poin virtual.
-  Tidak ada uang asli, deposit, penarikan,
-  atau hadiah uang.
-
-</div>
-
-</div>
-
 
 <script>
 
 /* =========================
-   DATA GAME
+   SIMBOL
 ========================= */
 
 const symbols = [
-
   "🍒",
-  "💎",
+  "🍀",
   "⭐",
+  "💎",
   "7️⃣",
   "🔔",
-  "🍀",
+  "🎁",
   "🍋",
   "🍇",
-  "🎁"
-
+  "🎯"
 ];
 
 
-/*
-   Nilai kemenangan
-*/
+/* =========================
+   HADIAH
+========================= */
 
 const payouts = {
 
-  "🍒": 3,
-  "💎": 8,
-  "⭐": 5,
-  "7️⃣": 10,
-  "🔔": 4,
-  "🍀": 6,
-  "🍋": 3,
-  "🍇": 4,
-  "🎁": 12
+  "🍒":3,
+  "🍀":15,
+  "⭐":25,
+  "💎":50,
+  "7️⃣":100,
+  "🎁":200,
+  "🔔":8,
+  "🍋":5,
+  "🍇":10
 
 };
 
@@ -322,27 +392,57 @@ const payouts = {
    VARIABEL
 ========================= */
 
-let balance = 100000;
+let balance = 1000000;
 
-let auto = false;
+let autoSpin = false;
 
-let timer = null;
+let autoTimer = null;
 
 let sessionSpent = 0;
 
+let musicOn = false;
+
 
 /* =========================
-   HELPER
+   ELEMENT
 ========================= */
 
-const $ = id => {
+const balanceElement =
+  document.getElementById("balance");
 
-  return document.getElementById(id);
+const resultElement =
+  document.getElementById("result");
 
-};
+const statusElement =
+  document.getElementById("status");
+
+const betElement =
+  document.getElementById("bet");
+
+const budgetElement =
+  document.getElementById("budget");
+
+const autoButton =
+  document.getElementById("auto");
+
+const spinButton =
+  document.getElementById("spin");
+
+const musicButton =
+  document.getElementById("music");
+
+const bgMusic =
+  document.getElementById("bgMusic");
+
+const cells =
+  document.querySelectorAll(".cell");
 
 
-function fmt(number) {
+/* =========================
+   FORMAT
+========================= */
+
+function formatNumber(number){
 
   return new Intl.NumberFormat(
     "id-ID"
@@ -352,16 +452,30 @@ function fmt(number) {
 
 
 /* =========================
-   UPDATE TAMPILAN
+   UPDATE
 ========================= */
 
-function update() {
+function updateBalance(){
 
-  $("balance").textContent =
-    fmt(balance);
+  balanceElement.textContent =
+    formatNumber(balance);
 
-  $("auto").textContent =
-    `AUTO SPIN: ${auto ? "ON" : "OFF"}`;
+}
+
+
+/* =========================
+   RANDOM
+========================= */
+
+function randomSymbol(){
+
+  const index =
+    Math.floor(
+      Math.random() *
+      symbols.length
+    );
+
+  return symbols[index];
 
 }
 
@@ -370,37 +484,33 @@ function update() {
    SPIN
 ========================= */
 
-function spin() {
+function spin(){
 
   const bet =
     Math.floor(
-      Number($("bet").value)
+      Number(betElement.value)
     );
 
   const budget =
     Math.floor(
-      Number($("budget").value)
+      Number(budgetElement.value)
     );
 
 
-  /* Cek taruhan */
+  if(!bet || bet < 100){
 
-  if (!bet || bet < 100) {
-
-    $("result").textContent =
-      "Taruhan minimal 100 poin virtual.";
+    resultElement.textContent =
+      "❌ Bet minimal 100 poin.";
 
     return;
 
   }
 
 
-  /* Cek saldo */
+  if(bet > balance){
 
-  if (bet > balance) {
-
-    $("result").textContent =
-      "Saldo virtual tidak cukup.";
+    resultElement.textContent =
+      "❌ Saldo virtual tidak cukup.";
 
     stopAuto();
 
@@ -409,15 +519,13 @@ function spin() {
   }
 
 
-  /* Cek budget */
-
-  if (
+  if(
     sessionSpent + bet >
     budget
-  ) {
+  ){
 
-    $("result").textContent =
-      "Spin ini melewati budget sesi.";
+    resultElement.textContent =
+      "⚠️ Budget sesi sudah tercapai.";
 
     stopAuto();
 
@@ -425,66 +533,123 @@ function spin() {
 
   }
 
-
-  /* Kurangi saldo */
 
   balance -= bet;
 
   sessionSpent += bet;
 
+  updateBalance();
 
-  /* Ambil kotak reel */
-
-  const cells =
-    [
-      ...document.querySelectorAll(".cell")
-    ];
-
-
-  /* Acak simbol */
-
-  const values =
-    cells.map(() => {
-
-      const random =
-        Math.floor(
-          Math.random() *
-          symbols.length
-        );
-
-      return symbols[random];
-
-    });
-
-
-  /* Tampilkan */
 
   cells.forEach(
-    (cell, index) => {
+    cell => {
 
-      cell.textContent =
-        values[index];
+      cell.classList.add(
+        "spin-animation"
+      );
 
     }
   );
 
 
-  /* =========================
-     HITUNG KEMENANGAN
-  ========================= */
+  resultElement.textContent =
+    "🎰 SPINNING...";
+
+  spinButton.disabled = true;
+
+
+  let count = 0;
+
+
+  const animation =
+    setInterval(
+
+      () => {
+
+        cells.forEach(
+          cell => {
+
+            cell.textContent =
+              randomSymbol();
+
+          }
+        );
+
+
+        count++;
+
+
+        if(count >= 15){
+
+          clearInterval(
+            animation
+          );
+
+
+          cells.forEach(
+            cell => {
+
+              cell.classList.remove(
+                "spin-animation"
+              );
+
+            }
+          );
+
+
+          finishSpin();
+
+        }
+
+      },
+
+      100
+
+    );
+
+}
+
+
+/* =========================
+   HASIL
+========================= */
+
+function finishSpin(){
+
+  const values = [];
+
+
+  cells.forEach(
+    cell => {
+
+      const symbol =
+        randomSymbol();
+
+      cell.textContent =
+        symbol;
+
+      values.push(symbol);
+
+    }
+  );
+
+
+  const bet =
+    Math.floor(
+      Number(betElement.value)
+    );
+
 
   let win = 0;
 
 
-  /*
-     Cek 3 baris
-  */
+  /* 3 SIMBOL SEBARIS */
 
-  for (
+  for(
     let row = 0;
     row < 3;
     row++
-  ) {
+  ){
 
     const a =
       values[row * 3];
@@ -496,10 +661,11 @@ function spin() {
       values[row * 3 + 2];
 
 
-    if (
+    if(
       a === b &&
-      b === c
-    ) {
+      b === c &&
+      payouts[a]
+    ){
 
       win +=
         bet * payouts[a];
@@ -509,56 +675,73 @@ function spin() {
   }
 
 
-  /*
-     Bonus jika dua simbol
-     tengah sama
-  */
+  /* SCATTER */
 
-  if (
-    values[3] === values[4] ||
-    values[4] === values[5]
-  ) {
+  const scatter =
+    values.filter(
+      symbol =>
+        symbol === "🎯"
+    ).length;
 
-    win += bet;
+
+  if(scatter === 1){
+
+    win += 500;
 
   }
 
 
-  /* Tambahkan kemenangan */
+  if(scatter === 2){
+
+    win += 5000;
+
+  }
+
+
+  if(scatter >= 3){
+
+    win += 50000;
+
+  }
+
 
   balance += win;
 
 
-  /* =========================
-     HASIL
-  ========================= */
+  if(win > 0){
 
-  if (win > 0) {
+    resultElement.textContent =
+      "🎉 MENANG +" +
+      formatNumber(win) +
+      " POIN!";
 
-    $("result").textContent =
-      `🎉 MENANG +${fmt(win)} poin virtual!`;
+  }else{
 
-  } else {
-
-    $("result").textContent =
-      `Tidak menang. -${fmt(bet)} poin virtual`;
+    resultElement.textContent =
+      "😅 Belum menang.";
 
   }
 
 
-  $("status").textContent =
-    `Terpakai: ${fmt(sessionSpent)} / ${fmt(budget)} poin`;
+  statusElement.textContent =
+    "Budget terpakai: " +
+    formatNumber(sessionSpent) +
+    " / " +
+    formatNumber(
+      Number(budgetElement.value)
+    );
 
 
-  update();
+  updateBalance();
+
+  spinButton.disabled = false;
 
 
-  /* Stop kalau budget habis */
-
-  if (
+  if(
     balance < 100 ||
-    sessionSpent >= budget
-  ) {
+    sessionSpent >=
+    Number(budgetElement.value)
+  ){
 
     stopAuto();
 
@@ -571,35 +754,24 @@ function spin() {
    AUTO SPIN
 ========================= */
 
-function startAuto() {
+function startAuto(){
 
-  if (auto) return;
+  if(autoSpin) return;
 
-
-  auto = true;
-
-  /*
-     Mulai budget baru
-  */
+  autoSpin = true;
 
   sessionSpent = 0;
 
+  autoButton.textContent =
+    "AUTO SPIN: ON";
 
-  $("status").textContent =
-    "Auto spin berjalan...";
+  statusElement.textContent =
+    "🔄 Auto Spin berjalan...";
 
-
-  update();
-
-
-  /*
-     Spin setiap 0,9 detik
-  */
-
-  timer =
+  autoTimer =
     setInterval(
       spin,
-      900
+      1200
     );
 
 }
@@ -609,41 +781,127 @@ function startAuto() {
    STOP AUTO
 ========================= */
 
-function stopAuto() {
+function stopAuto(){
 
-  auto = false;
+  autoSpin = false;
 
+  clearInterval(
+    autoTimer
+  );
 
-  clearInterval(timer);
+  autoTimer = null;
 
-  timer = null;
-
-
-  update();
+  autoButton.textContent =
+    "AUTO SPIN: OFF";
 
 }
 
 
 /* =========================
-   TOMBOL SPIN
+   MUSIK
 ========================= */
 
-$("spin").onclick =
-  spin;
+function startMusic(){
+
+  bgMusic.volume = 0.5;
+
+  bgMusic.play()
+    .then(() => {
+
+      musicOn = true;
+
+      musicButton.textContent =
+        "🔊 MUSIK ON";
+
+    })
+    .catch(() => {
+
+      musicOn = false;
+
+      musicButton.textContent =
+        "🔇 TEKAN UNTUK MUSIK";
+
+    });
+
+}
+
+
+function stopMusic(){
+
+  bgMusic.pause();
+
+  musicOn = false;
+
+  musicButton.textContent =
+    "🔇 MUSIK OFF";
+
+}
+
+
+musicButton.onclick =
+  function(){
+
+    if(musicOn){
+
+      stopMusic();
+
+    }else{
+
+      startMusic();
+
+    }
+
+  };
+
+
+/*
+  Coba mulai saat situs dibuka.
+  Browser HP mungkin memblokir autoplay.
+*/
+
+window.addEventListener(
+  "load",
+  function(){
+
+    startMusic();
+
+  }
+);
+
+
+/*
+  Kalau autoplay diblokir,
+  interaksi pertama pengguna
+  akan mencoba menyalakan musik.
+*/
+
+document.addEventListener(
+  "click",
+  function(){
+
+    if(!musicOn){
+
+      startMusic();
+
+    }
+
+  },
+  {once:true}
+);
 
 
 /* =========================
-   TOMBOL AUTO
+   BUTTON AUTO
 ========================= */
 
-$("auto").onclick =
-  () => {
+autoButton.onclick =
+  function(){
 
-    if (auto) {
+    if(autoSpin){
 
       stopAuto();
 
-    } else {
+    }else{
 
       startAuto();
 
@@ -656,34 +914,45 @@ $("auto").onclick =
    RESET
 ========================= */
 
-$("reset").onclick =
-  () => {
+document
+.getElementById("reset")
+.onclick =
+function(){
 
-    stopAuto();
+  stopAuto();
 
-    balance = 100000;
+  balance = 1000000;
 
-    sessionSpent = 0;
-
-
-    $("result").textContent =
-      "Saldo direset.";
+  sessionSpent = 0;
 
 
-    $("status").textContent =
-      "";
+  cells[0].textContent="🍒";
+  cells[1].textContent="💎";
+  cells[2].textContent="⭐";
+  cells[3].textContent="7️⃣";
+  cells[4].textContent="🎯";
+  cells[5].textContent="🔔";
+  cells[6].textContent="🍀";
+  cells[7].textContent="🎁";
+  cells[8].textContent="🍋";
 
 
-    update();
+  resultElement.textContent =
+    "Saldo virtual direset!";
 
-  };
+  statusElement.textContent =
+    "";
+
+  updateBalance();
+
+};
 
 
 /* =========================
-   MULAI
+   START
 ========================= */
 
-update();
+updateBalance();
 
 </script>
 
