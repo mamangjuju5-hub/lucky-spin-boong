@@ -1,162 +1,277 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lucky Spin - Game Demo</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Spin - Demo</title>
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #080914;
-      color: white;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    header {
-      padding: 18px 7%;
-      background: #111221;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #090914;
+  color: white;
+  text-align: center;
+}
 
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #ffd43b;
-    }
+header {
+  padding: 20px;
+  background: #111122;
+  color: #ffd43b;
+  font-size: 28px;
+  font-weight: bold;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-    }
+.container {
+  max-width: 500px;
+  margin: auto;
+  padding: 25px 18px;
+}
 
-    .hero {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(135deg, #160b35, #37106b);
-    }
+h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
+.subtitle {
+  color: #ccc;
+  margin-bottom: 25px;
+}
 
-    .hero p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
+.saldo {
+  background: #17172d;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
 
-    .spin {
-      background: #ffd43b;
-      border: none;
-      padding: 15px 35px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+#saldo {
+  color: #ffd43b;
+  font-weight: bold;
+}
 
-    .games {
-      padding: 40px 7%;
-    }
+.slot {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 25px 0;
+}
 
-    .games h2 {
-      margin-bottom: 25px;
-    }
+.reel {
+  width: 100px;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: black;
+  border-radius: 15px;
+  font-size: 55px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.4);
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-    }
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    .card {
-      padding: 35px 10px;
-      text-align: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #32115c, #171936);
-      font-size: 20px;
-    }
+#spinBtn {
+  background: #ffd43b;
+  color: #111;
+}
 
-    footer {
-      text-align: center;
-      padding: 30px;
-      color: #aaa;
-    }
+#spinBtn:disabled {
+  opacity: .5;
+}
 
-    @media (max-width: 700px) {
-      nav {
-        display: none;
-      }
+#resetBtn {
+  margin-top: 12px;
+  background: #33334d;
+  color: white;
+  font-size: 16px;
+}
 
-      .hero h1 {
-        font-size: 36px;
-      }
+#hasil {
+  min-height: 35px;
+  margin: 20px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
 
-      .cards {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-  </style>
+.info {
+  margin-top: 30px;
+  background: #141426;
+  border-radius: 15px;
+  padding: 18px;
+  text-align: left;
+}
+
+.info h2 {
+  margin-top: 0;
+}
+
+ul {
+  padding-left: 22px;
+}
+
+footer {
+  color: #888;
+  padding: 30px 10px;
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">LUCKY SPIN</div>
+<header>LUCKY SPIN</header>
 
-    <nav>
-      <a href="#">Beranda</a>
-      <a href="#">Game</a>
-      <a href="#">Promo</a>
-    </nav>
-  </header>
+<div class="container">
 
-  <section class="hero">
-    <h1>LUCKY SPIN 🎰</h1>
-    <p>Game spin demo dengan poin virtual</p>
-    <button class="spin" onclick="spin()">PUTAR SEKARANG</button>
+  <h1>🎰 Lucky Spin</h1>
+  <p class="subtitle">Game slot demo dengan poin virtual</p>
 
-    <h2 id="result" style="margin-top:30px;">🎁 Siap bermain?</h2>
-  </section>
+  <div class="saldo">
+    💰 Poin:
+    <span id="saldo">1000</span>
+  </div>
 
-  <section class="games">
-    <h2>Game Demo</h2>
+  <div class="slot">
+    <div class="reel" id="reel1">🍒</div>
+    <div class="reel" id="reel2">💎</div>
+    <div class="reel" id="reel3">⭐</div>
+  </div>
 
-    <div class="cards">
-      <div class="card">🍒<br>Cherry Spin</div>
-      <div class="card">💎<br>Diamond Spin</div>
-      <div class="card">🍀<br>Lucky Clover</div>
-      <div class="card">⭐<br>Star Spin</div>
-    </div>
-  </section>
+  <p>Biaya 1 putaran: <b>10 poin</b></p>
 
-  <footer>
-    Lucky Spin — Demo game dengan poin virtual
-  </footer>
+  <button id="spinBtn" onclick="spin()">PUTAR 🎰</button>
+  <br>
+  <button id="resetBtn" onclick="resetGame()">RESET GAME</button>
 
-  <script>
-    function spin() {
-      const hadiah = [
-        "🍒 CHERRY!",
-        "💎 DIAMOND!",
-        "🍀 LUCKY!",
-        "⭐ JACKPOT DEMO!",
-        "🎁 BONUS!"
-      ];
+  <div id="hasil">Tekan PUTAR untuk mulai!</div>
 
-      const hasil = hadiah[Math.floor(Math.random() * hadiah.length)];
+  <div class="info">
+    <h2>🏆 Hadiah Demo</h2>
+    <ul>
+      <li>🍒🍒🍒 = +100 poin</li>
+      <li>💎💎💎 = +250 poin</li>
+      <li>⭐⭐⭐ = +500 poin</li>
+      <li>🍀🍀🍀 = +150 poin</li>
+      <li>7️⃣7️⃣7️⃣ = +1000 poin</li>
+      <li>Selain itu = tidak menang</li>
+    </ul>
+  </div>
 
-      document.getElementById("result").textContent = hasil;
+</div>
+
+<footer>
+  Lucky Spin — Demo game dengan poin virtual
+</footer>
+
+<script>
+const symbols = ["🍒", "💎", "⭐", "🍀", "7️⃣"];
+
+let saldo = 1000;
+let sedangSpin = false;
+
+const reel1 = document.getElementById("reel1");
+const reel2 = document.getElementById("reel2");
+const reel3 = document.getElementById("reel3");
+const saldoText = document.getElementById("saldo");
+const hasil = document.getElementById("hasil");
+const spinBtn = document.getElementById("spinBtn");
+
+function updateSaldo() {
+  saldoText.textContent = saldo;
+}
+
+function randomSymbol() {
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+function spin() {
+  if (sedangSpin) return;
+
+  if (saldo < 10) {
+    hasil.textContent = "❌ Poin tidak cukup. Tekan RESET GAME.";
+    return;
+  }
+
+  sedangSpin = true;
+  spinBtn.disabled = true;
+
+  saldo -= 10;
+  updateSaldo();
+
+  hasil.textContent = "🎰 Memutar...";
+
+  let counter = 0;
+
+  const animasi = setInterval(() => {
+    reel1.textContent = randomSymbol();
+    reel2.textContent = randomSymbol();
+    reel3.textContent = randomSymbol();
+
+    counter++;
+
+    if (counter >= 15) {
+      clearInterval(animasi);
+      selesaiSpin();
     }
-  </script>
+  }, 100);
+}
+
+function selesaiSpin() {
+  const a = randomSymbol();
+  const b = randomSymbol();
+  const c = randomSymbol();
+
+  reel1.textContent = a;
+  reel2.textContent = b;
+  reel3.textContent = c;
+
+  let hadiah = 0;
+
+  if (a === b && b === c) {
+    if (a === "🍒") hadiah = 100;
+    else if (a === "💎") hadiah = 250;
+    else if (a === "⭐") hadiah = 500;
+    else if (a === "🍀") hadiah = 150;
+    else if (a === "7️⃣") hadiah = 1000;
+  }
+
+  if (hadiah > 0) {
+    saldo += hadiah;
+    hasil.textContent = "🎉 MENANG! +" + hadiah + " poin!";
+  } else {
+    hasil.textContent = "😅 Belum beruntung. Coba lagi!";
+  }
+
+  updateSaldo();
+
+  sedangSpin = false;
+  spinBtn.disabled = false;
+}
+
+function resetGame() {
+  saldo = 1000;
+
+  reel1.textContent = "🍒";
+  reel2.textContent = "💎";
+  reel3.textContent = "⭐";
+
+  hasil.textContent = "Game direset. Selamat bermain!";
+  updateSaldo();
+}
+</script>
 
 </body>
 </html>
