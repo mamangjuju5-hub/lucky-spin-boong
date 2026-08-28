@@ -1,1091 +1,1038 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Lucky Spin Arcade Demo</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FISHING 777</title>
 
 <style>
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  margin:0;
-  background:#080511;
+  font-family:Arial,sans-serif;
   color:#fff;
-  font-family:Arial,sans-serif
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 15% 10%,#244a86 0,transparent 28%),
+    radial-gradient(circle at 90% 20%,#50156c 0,transparent 28%),
+    linear-gradient(145deg,#04050d,#0b1024,#03040a);
+  overflow-x:hidden;
 }
 
-header{
-  text-align:center;
-  padding:16px;
-  background:linear-gradient(#2b1053,#12081f);
-  border-bottom:2px solid #ffd43b
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 20% 40%,rgba(0,180,255,.13),transparent 25%),
+    radial-gradient(circle at 80% 60%,rgba(255,0,180,.12),transparent 25%);
+  animation:bgPulse 5s infinite alternate;
 }
 
-h1{
-  margin:0;
-  color:#ffd43b
-}
+@keyframes bgPulse{from{opacity:.4}to{opacity:1}}
 
-.wrap{
-  max-width:560px;
+.app{
+  max-width:540px;
   margin:auto;
-  padding:14px
+  min-height:100vh;
+  position:relative;
+  z-index:1;
 }
 
-.balance,
-.controls,
-.pay,
-.machine{
-  background:#160c29;
-  border:1px solid #55327e;
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:14px
+.header{
+  padding:20px 12px;
+  text-align:center;
+  background:linear-gradient(180deg,#111b42,#070914);
+  border-bottom:2px solid #ffd52f;
+  box-shadow:0 0 12px #1684ff,0 0 35px rgba(255,210,30,.25);
+}
+
+.logo{
+  font-size:34px;
+  font-weight:900;
+  color:#ffd735;
+  text-shadow:0 0 5px white,0 0 14px #ffb300,0 0 30px #ff5e00;
 }
 
 .balance{
+  margin:17px 14px;
+  padding:16px 19px;
+  border-radius:20px;
+  border:2px solid #7132e8;
+  background:linear-gradient(90deg,#0e0920,#1b1035);
+  box-shadow:0 0 15px #6128db;
   display:flex;
   justify-content:space-between;
-  align-items:center
+  align-items:center;
 }
+
+.balance-title{font-weight:bold;font-size:18px}
 
 .money{
-  color:#ffd43b;
+  color:#ffd52f;
   font-size:24px;
-  font-weight:bold
+  font-weight:900;
+  text-shadow:0 0 12px #ffae00;
 }
 
-.tabs{
+.home{padding:10px 14px 40px}
+
+.hero{
+  padding:25px 15px;
+  text-align:center;
+  border-radius:25px;
+  background:radial-gradient(circle at center,#213e70,#0d1228 65%);
+  border:2px solid #2586ff;
+  box-shadow:0 0 15px #197cff,inset 0 0 30px rgba(0,120,255,.16);
+}
+
+.hero h1{
+  color:#ffd52f;
+  font-size:37px;
+  margin-bottom:8px;
+  text-shadow:0 0 8px white,0 0 20px #ffb000;
+}
+
+.hero p{color:#bac6e3;margin-bottom:24px}
+
+.game-grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:14px
+  gap:13px;
 }
 
-.tab{
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:#3d2564;
-  color:white;
-  font-weight:bold
+.game-card{
+  min-height:180px;
+  padding:17px 8px;
+  border-radius:22px;
+  background:linear-gradient(145deg,#29104e,#0c091b);
+  border:2px solid #7b34ff;
+  box-shadow:0 0 13px #6725e8;
+  cursor:pointer;
+  text-align:center;
+  transition:.2s;
 }
 
-.tab.active{
-  background:#ffd43b;
-  color:#160d20
+.game-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 28px #8e4cff;
 }
+
+.game-icon{
+  font-size:60px;
+  margin:13px 0;
+  filter:drop-shadow(0 0 10px #ffd52f);
+}
+
+.game-card h2{color:#ffd735;font-size:19px}
+.game-card p{color:#aeb7d3;font-size:12px;margin-top:8px}
 
 .game{
-  display:none
+  display:none;
+  padding:5px 14px 40px;
 }
 
-.game.active{
-  display:block
+.back{
+  background:#28154b;
+  border:1px solid #6731a5;
+  color:white;
+  padding:12px 18px;
+  border-radius:12px;
+  cursor:pointer;
+  margin-bottom:10px;
 }
 
-.machine{
-  background:linear-gradient(145deg,#371266,#120822);
-  border:3px solid #7445aa
+.game-title{
+  text-align:center;
+  color:#ffd735;
+  font-size:31px;
+  margin:7px 0 15px;
+  text-shadow:0 0 8px white,0 0 18px #ff9800;
+}
+
+/* SLOT */
+
+.slot-machine{
+  padding:12px;
+  border-radius:28px;
+  background:linear-gradient(145deg,#3b1190,#110627);
+  border:4px solid #ffd02b;
+  box-shadow:0 0 10px #fff000,0 0 30px #ff8c00,inset 0 0 25px black;
 }
 
 .reels{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(5,1fr);
   gap:6px;
   padding:8px;
-  background:#0b0713;
-  border:5px solid #ffd43b;
-  border-radius:15px
+  background:#08040d;
+  border:2px solid #913dff;
+  border-radius:17px;
+  box-shadow:inset 0 0 22px #260054;
 }
 
 .cell{
-  height:100px;
+  aspect-ratio:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:45px;
-  background:linear-gradient(#1b122e,#080611);
-  border:2px solid #7045a4;
-  border-radius:9px
+  font-size:34px;
+  border-radius:10px;
+  background:linear-gradient(145deg,#171023,#07040d);
+  border:2px solid #6933cf;
+  box-shadow:inset 0 0 12px #260452;
 }
 
-.spinanim{
-  animation:shake .08s infinite
+.cell.spin{
+  animation:cellSpin .11s infinite alternate;
 }
 
-@keyframes shake{
-  50%{
-    transform:translateY(6px)
-  }
+@keyframes cellSpin{
+  from{transform:translateY(-4px);filter:blur(1.5px)}
+  to{transform:translateY(4px);filter:blur(0)}
 }
 
-.result{
+.cell.win{
+  animation:winFlash .35s infinite alternate;
+}
+
+@keyframes winFlash{
+  from{transform:scale(1);border-color:white;box-shadow:0 0 5px white}
+  to{transform:scale(1.09);border-color:#ffd900;box-shadow:0 0 15px #ffd900,0 0 30px #ff7700}
+}
+
+.win-message{
+  min-height:35px;
   text-align:center;
-  color:#ffd43b;
-  font-size:19px;
+  margin:12px 0;
+  color:#ffd735;
+  font-size:20px;
   font-weight:bold;
-  padding:12px;
-  min-height:46px
+  text-shadow:0 0 13px #ff9000;
 }
 
-label{
-  font-size:13px;
-  color:#aaa
+.stats{
+  display:flex;
+  justify-content:space-around;
+  text-align:center;
+  color:#ffd735;
+  margin-bottom:10px;
 }
 
-input{
+.stats b{display:block;font-size:18px}
+.stats small{color:#aaa}
+
+.controls{
+  margin-top:10px;
+  padding:13px;
+  border-radius:18px;
+  background:#100a20;
+  border:1px solid #522498;
+}
+
+.row{display:flex;gap:8px;margin-bottom:9px}
+
+.input{
   width:100%;
-  margin-top:5px;
-  padding:12px;
-  background:#080511;
-  color:#fff;
-  border:1px solid #57357d;
-  border-radius:10px
-}
-
-.fields,
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px
-}
-
-.buttons{
-  margin-top:10px
-}
-
-button{
-  padding:14px;
-  border:0;
+  padding:13px;
+  background:#07050d;
+  color:white;
+  border:1px solid #7436bd;
   border-radius:11px;
   font-size:16px;
-  font-weight:bold
+  outline:none;
 }
 
-.spin{
-  background:linear-gradient(#ffe75d,#e7ad21)
-}
-
-.auto{
-  background:#53337f;
-  color:white
-}
-
-.reset{
+.btn{
   width:100%;
-  margin-top:10px;
-  background:#932542;
-  color:#fff
+  padding:15px;
+  border:0;
+  border-radius:13px;
+  color:white;
+  font-weight:bold;
+  font-size:17px;
+  cursor:pointer;
 }
 
-.sound{
-  width:100%;
-  margin-top:10px;
-  background:#24636c;
-  color:#fff
+.btn:active{transform:scale(.97)}
+
+.max-btn{
+  background:linear-gradient(180deg,#9141ff,#5112be);
+  margin-bottom:9px;
 }
 
-.status{
+.spin-btn{
+  background:linear-gradient(180deg,#52ff32,#13a900);
+  color:#062500;
+  box-shadow:0 0 10px #35ff18,0 0 25px rgba(50,255,20,.35);
+}
+
+.auto-btn{background:#35205b;margin-top:9px}
+
+.auto-btn.active{
+  background:linear-gradient(180deg,#ffd52f,#e99800);
+  color:#241500;
+  box-shadow:0 0 20px #ffbd00;
+}
+
+.reset-btn{background:#9d193d;margin-top:9px}
+
+.budget-info{
   text-align:center;
-  color:#91d89b;
+  margin-top:10px;
+  color:#8fe58f;
   font-size:13px;
-  margin-top:8px
 }
 
-.pay h2{
+.paytable{
+  margin-top:15px;
+  padding:17px;
+  border-radius:20px;
+  background:#100a20;
+  border:1px solid #54249b;
+}
+
+.paytable h2{
   text-align:center;
-  color:#ffd43b
+  color:#ffd735;
+  margin-bottom:12px;
 }
 
-.row{
+.reward{
   display:flex;
   justify-content:space-between;
-  padding:8px;
-  border-bottom:1px solid #302143
-}
-
-.row b{
-  color:#ffd43b
-}
-
-.wheelbox{
-  display:flex;
-  justify-content:center;
-  position:relative
-}
-
-.wheel{
-  width:280px;
-  height:280px;
-  border-radius:50%;
-  border:10px solid #ffd43b;
-
-  background:
-  conic-gradient(
-    #ef5350 0 45deg,
-    #7e57c2 45deg 90deg,
-    #26a69a 90deg 135deg,
-    #ffca28 135deg 180deg,
-    #42a5f5 180deg 225deg,
-    #ab47bc 225deg 270deg,
-    #66bb6a 270deg 315deg,
-    #ff7043 315deg
-  );
-
-  transition:
-    transform 4s cubic-bezier(.12,.7,.15,1);
-
-  display:flex;
   align-items:center;
-  justify-content:center;
-
-  box-shadow:0 0 25px #000
+  padding:9px 4px;
+  border-bottom:1px solid #2d2140;
 }
 
-.wheel:after{
-  content:"SPIN";
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  background:#120b20;
-  border:4px solid #ffd43b;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#ffd43b;
-  font-weight:bold
+.reward b{color:#ffd735}
+
+/* WHEEL */
+
+.wheel-box{
+  padding:18px 10px 20px;
+  border-radius:25px;
+  background:radial-gradient(circle,#32136b,#0d081b);
+  border:3px solid #ffd02d;
+  box-shadow:0 0 12px #ffd02d,0 0 35px rgba(255,145,0,.5);
+}
+
+.wheel-wrap{
+  width:330px;
+  max-width:86vw;
+  aspect-ratio:1;
+  margin:5px auto 20px;
+  position:relative;
 }
 
 .pointer{
   position:absolute;
-  z-index:2;
-  top:-8px;
-  font-size:30px
+  z-index:10;
+  left:50%;
+  top:-9px;
+  transform:translateX(-50%);
+  font-size:34px;
+  color:white;
+  text-shadow:0 0 5px white,0 0 15px #00aaff;
 }
 
-footer{
+.wheel{
+  width:100%;
+  height:100%;
+  position:relative;
+  border-radius:50%;
+  border:9px solid #ffd52f;
+  background:conic-gradient(
+    #e84242 0deg 45deg,
+    #7735d9 45deg 90deg,
+    #16a9a2 90deg 135deg,
+    #e9ad22 135deg 180deg,
+    #278ed0 180deg 225deg,
+    #a747c3 225deg 270deg,
+    #5aae63 270deg 315deg,
+    #ef7047 315deg 360deg
+  );
+  box-shadow:0 0 12px white,0 0 35px #ffae00,inset 0 0 18px rgba(0,0,0,.6);
+  transition:transform 4s cubic-bezier(.12,.75,.15,1);
+}
+
+.wheel-item{
+  position:absolute;
+  width:25%;
+  height:25%;
+  left:37.5%;
+  top:37.5%;
+  transform-origin:50% 50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:32px;
+  font-weight:bold;
+  pointer-events:none;
+}
+
+.wheel-item span{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:rgba(0,0,0,.28);
+  text-shadow:0 0 5px white,0 0 12px #ffd000;
+}
+
+.wheel-item small{
+  font-size:9px;
+  color:white;
+  margin-top:2px;
+}
+
+.wheel-center{
+  position:absolute;
+  z-index:4;
+  width:78px;
+  height:78px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  background:#090611;
+  border:5px solid #ffd52f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#ffd52f;
+  font-weight:900;
+  box-shadow:0 0 10px #ffd52f,0 0 25px #ff8000;
+}
+
+.wheel-result{
+  min-height:36px;
   text-align:center;
-  color:#777;
-  font-size:12px;
-  padding:20px
+  color:#ffd735;
+  font-size:21px;
+  font-weight:bold;
+  text-shadow:0 0 12px #ff9900;
+  margin-bottom:10px;
+}
+
+/* POPUP */
+
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.82);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+
+.popup-box{
+  width:90%;
+  max-width:380px;
+  padding:28px 18px;
+  border-radius:25px;
+  text-align:center;
+  background:linear-gradient(145deg,#291052,#090611);
+  border:3px solid #ffd52f;
+  box-shadow:0 0 20px #ffd52f,0 0 45px #ff7500;
+  animation:popup .3s;
+}
+
+@keyframes popup{
+  from{transform:scale(.5);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+
+.popup-icon{font-size:65px}
+
+.popup-title{
+  color:#ffd735;
+  margin:10px 0;
+  font-size:27px;
+}
+
+.popup-text{color:#d2cbe0}
+
+.close-btn{
+  margin-top:18px;
+  padding:13px 35px;
+  border:0;
+  border-radius:12px;
+  background:#7130dc;
+  color:white;
+  font-weight:bold;
+}
+
+/* COIN */
+
+.coin{
+  position:fixed;
+  z-index:200;
+  pointer-events:none;
+  font-size:27px;
+  animation:coinFall 1.3s ease-out forwards;
+}
+
+@keyframes coinFall{
+  0%{transform:translateY(-20px) scale(.4) rotate(0);opacity:1}
+  100%{transform:translateY(280px) scale(1.2) rotate(360deg);opacity:0}
+}
+
+/* JACKPOT EXPLOSION */
+
+.jackpot-explosion{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  pointer-events:none;
+  display:none;
+  overflow:hidden;
+}
+
+.jackpot-explosion.active{
+  display:block;
+  animation:jackpotFlash .8s ease-out;
+}
+
+@keyframes jackpotFlash{
+  0%{background:rgba(255,255,255,.9)}
+  15%{background:rgba(255,215,0,.35)}
+  100%{background:transparent}
+}
+
+.jackpot-text{
+  position:absolute;
+  left:50%;
+  top:45%;
+  transform:translate(-50%,-50%) scale(.2);
+  font-size:52px;
+  font-weight:1000;
+  color:#ffd700;
+  text-align:center;
+  text-shadow:
+    0 0 5px white,
+    0 0 15px #ffd700,
+    0 0 35px #ff6500,
+    0 0 60px #ff0000;
+  white-space:nowrap;
+  animation:jackpotText 1.4s cubic-bezier(.15,.8,.2,1) forwards;
+}
+
+@keyframes jackpotText{
+  0%{transform:translate(-50%,-50%) scale(.1) rotate(-8deg);opacity:0}
+  25%{transform:translate(-50%,-50%) scale(1.25) rotate(3deg);opacity:1}
+  50%{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
+  100%{transform:translate(-50%,-50%) scale(1.15);opacity:0}
+}
+
+.explosion-particle{
+  position:absolute;
+  left:50%;
+  top:45%;
+  font-size:28px;
+  animation:explodeParticle 1.1s ease-out forwards;
+}
+
+@keyframes explodeParticle{
+  0%{
+    transform:translate(-50%,-50%) scale(.2);
+    opacity:1;
+  }
+  100%{
+    transform:
+      translate(calc(-50% + var(--x)),calc(-50% + var(--y)))
+      scale(1.4)
+      rotate(720deg);
+    opacity:0;
+  }
+}
+
+@media(max-width:420px){
+  .logo{font-size:30px}
+  .game-grid{grid-template-columns:1fr}
+  .game-card{min-height:160px}
+  .cell{font-size:28px}
+  .reels{gap:4px;padding:5px}
+  .wheel-item{font-size:27px}
+  .wheel-item span{width:66px;height:66px}
+  .wheel-item small{font-size:8px}
+  .jackpot-text{font-size:39px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>🎰 LUCKY SPIN ARCADE</h1>
+<div class="jackpot-explosion" id="jackpotExplosion">
+  <div class="jackpot-text">👑 JACKPOT 777! 👑</div>
+</div>
+
+<div class="app">
+
+<header class="header">
+  <div class="logo">👑 FISHING 777</div>
 </header>
 
-<div class="wrap">
+<div class="balance">
+  <span class="balance-title">💰 SALDO VIRTUAL</span>
+  <span class="money" id="balance">1.000.000</span>
+</div>
 
-  <!-- SALDO -->
-  <div class="balance">
-    💰 Saldo Virtual
-    <span class="money" id="bal">1.000.000</span>
+<section class="home" id="home">
+
+  <div class="hero">
+
+    <h1>🎣 FISHING 777</h1>
+    <p>ARCADE SPIN • VIRTUAL DEMO</p>
+
+    <div class="game-grid">
+
+      <div class="game-card" onclick="openGame('slot')">
+        <div class="game-icon">🎰</div>
+        <h2>SLOT 777</h2>
+        <p>5 Reel • Bonus • Jackpot</p>
+      </div>
+
+      <div class="game-card" onclick="openGame('wheel')">
+        <div class="game-icon">🎡</div>
+        <h2>LUCKY WHEEL</h2>
+        <p>Putar roda hadiah</p>
+      </div>
+
+    </div>
+
   </div>
 
-  <!-- PILIH GAME -->
-  <div class="tabs">
-    <button class="tab active" onclick="game(1)">
-      🎰 SLOT 777
-    </button>
+</section>
 
-    <button class="tab" onclick="game(2)">
-      🎡 WHEEL BONUS
-    </button>
+<section class="game" id="slot">
+
+<button class="back" onclick="goHome()">← HOME</button>
+
+<h1 class="game-title">🎰 FISHING 777 SLOT</h1>
+
+<div class="slot-machine">
+
+  <div class="reels" id="reels"></div>
+
+  <div class="win-message" id="slotMessage">
+    🎁 SIAP SPIN!
   </div>
 
+  <div class="stats">
+    <div>
+      <b id="winAmount">0</b>
+      <small>WIN</small>
+    </div>
+    <div>
+      <b id="totalBet">1.000</b>
+      <small>BET</small>
+    </div>
+    <div>
+      <b>5</b>
+      <small>REEL</small>
+    </div>
+  </div>
 
-  <!-- GAME 1 -->
-  <section id="g1" class="game active">
+  <div class="controls">
 
-    <div class="machine">
-
-      <div class="reels" id="reels">
-
-        <div class="cell">7️⃣</div>
-        <div class="cell">🍒</div>
-        <div class="cell">🔔</div>
-
-        <div class="cell">💎</div>
-        <div class="cell">🍇</div>
-        <div class="cell">🎯</div>
-
-        <div class="cell">⭐</div>
-        <div class="cell">🍋</div>
-        <div class="cell">⭐</div>
-
-      </div>
-
-      <div class="result" id="r1">
-        TEKAN SPIN UNTUK BERMAIN
-      </div>
-
+    <div class="row">
+      <input class="input" id="slotBet" type="number" min="100" value="1000">
+      <input class="input" id="budget" type="number" min="1000" value="100000">
     </div>
 
+    <button class="btn max-btn" onclick="maxBet()">MAX BET</button>
 
-    <div class="controls">
+    <button class="btn spin-btn" onclick="spinSlot()">
+      🎰 SPIN
+    </button>
 
-      <div class="fields">
+    <button class="btn auto-btn" id="autoButton" onclick="toggleAuto()">
+      AUTO SPIN: OFF
+    </button>
 
-        <div>
-          <label>BET / SPIN</label>
+    <button class="btn reset-btn" onclick="resetBalance()">
+      RESET SALDO
+    </button>
 
-          <input
-            id="b1"
-            type="number"
-            value="1000"
-            min="100"
-          >
-        </div>
-
-        <div>
-          <label>BUDGET SESI</label>
-
-          <input
-            id="u1"
-            type="number"
-            value="100000"
-            min="100"
-          >
-        </div>
-
-      </div>
-
-
-      <div class="buttons">
-
-        <button class="spin" onclick="slot()">
-          SPIN 🎰
-        </button>
-
-        <button
-          class="auto"
-          id="ab"
-          onclick="auto()"
-        >
-          AUTO: OFF
-        </button>
-
-      </div>
-
-
-      <button class="sound" onclick="sound()">
-        🔇 SUARA: OFF
-      </button>
-
-
-      <button class="reset" onclick="reset()">
-        RESET SALDO
-      </button>
-
-
-      <div class="status" id="s1"></div>
-
+    <div class="budget-info">
+      Budget sesi:
+      <span id="budgetUsed">0</span> /
+      <span id="budgetShow">100.000</span>
     </div>
 
+  </div>
+</div>
 
-    <!-- PAYTABLE -->
+<div class="paytable">
 
-    <div class="pay">
+<h2>🎁 HADIAH VIRTUAL</h2>
 
-      <h2>🏆 PAYTABLE VIRTUAL</h2>
+<div class="reward"><span>7️⃣ 7️⃣ 7️⃣</span><b>x150</b></div>
+<div class="reward"><span>💎 💎 💎</span><b>x100</b></div>
+<div class="reward"><span>⭐ ⭐ ⭐</span><b>x75</b></div>
+<div class="reward"><span>🔔 🔔 🔔</span><b>x50</b></div>
+<div class="reward"><span>🍒 🍒 🍒</span><b>x25</b></div>
+<div class="reward"><span>🎁 🎁 🎁</span><b>+10.000</b></div>
 
-      <div class="row">
-        🍒🍒🍒
-        <b>×3</b>
-      </div>
+</div>
+</section>
 
-      <div class="row">
-        🍀🍀🍀
-        <b>×15</b>
-      </div>
+<section class="game" id="wheel">
 
-      <div class="row">
-        ⭐⭐⭐
-        <b>×25</b>
-      </div>
+<button class="back" onclick="goHome()">← HOME</button>
 
-      <div class="row">
-        💎💎💎
-        <b>×50</b>
-      </div>
+<h1 class="game-title">🎡 FISHING 777 WHEEL</h1>
 
-      <div class="row">
-        7️⃣7️⃣7️⃣
-        <b>×100</b>
-      </div>
+<div class="wheel-box">
 
-      <div class="row">
-        🎯 3 SCATTER
-        <b>+50.000</b>
-      </div>
+<div class="wheel-wrap">
 
-    </div>
+<div class="pointer">▼</div>
 
-  </section>
+<div class="wheel" id="wheelSpin">
 
+<div class="wheel-item" style="transform:rotate(22.5deg) translateY(-120px) rotate(-22.5deg)">
+<span>💰<small>+1.000</small></span>
+</div>
 
+<div class="wheel-item" style="transform:rotate(67.5deg) translateY(-120px) rotate(-67.5deg)">
+<span>💎<small>+2.500</small></span>
+</div>
 
-  <!-- GAME 2 -->
-  <section id="g2" class="game">
+<div class="wheel-item" style="transform:rotate(112.5deg) translateY(-120px) rotate(-112.5deg)">
+<span>🎁<small>+5.000</small></span>
+</div>
 
-    <div class="machine">
+<div class="wheel-item" style="transform:rotate(157.5deg) translateY(-120px) rotate(-157.5deg)">
+<span>💰<small>+10.000</small></span>
+</div>
 
-      <div class="wheelbox">
+<div class="wheel-item" style="transform:rotate(202.5deg) translateY(-120px) rotate(-202.5deg)">
+<span>👑<small>+25.000</small></span>
+</div>
 
-        <div class="pointer">
-          ▼
-        </div>
+<div class="wheel-item" style="transform:rotate(247.5deg) translateY(-120px) rotate(-247.5deg)">
+<span>💎<small>+5.000</small></span>
+</div>
 
-        <div
-          class="wheel"
-          id="wheel"
-        ></div>
+<div class="wheel-item" style="transform:rotate(292.5deg) translateY(-120px) rotate(-292.5deg)">
+<span>🎁<small>+2.500</small></span>
+</div>
 
-      </div>
-
-      <div class="result" id="r2">
-        PILIH BET, LALU PUTAR RODA
-      </div>
-
-    </div>
-
-
-    <div class="controls">
-
-      <div class="fields">
-
-        <div>
-
-          <label>
-            BET / PUTAR
-          </label>
-
-          <input
-            id="b2"
-            type="number"
-            value="1000"
-            min="100"
-          >
-
-        </div>
-
-
-        <div>
-
-          <label>
-            BUDGET SESI
-          </label>
-
-          <input
-            id="u2"
-            type="number"
-            value="100000"
-            min="100"
-          >
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="spin"
-        style="width:100%;margin-top:10px"
-        onclick="wheelSpin()"
-      >
-        PUTAR RODA 🎡
-      </button>
-
-
-      <button
-        class="reset"
-        onclick="reset()"
-      >
-        RESET SALDO
-      </button>
-
-
-      <div class="status" id="s2"></div>
-
-    </div>
-
-
-    <!-- HADIAH RODA -->
-
-    <div class="pay">
-
-      <h2>🎡 HADIAH RODA</h2>
-
-      <div class="row">
-        +100 poin
-        <b>+</b>
-      </div>
-
-      <div class="row">
-        ×3 BET
-        <b>×3</b>
-      </div>
-
-      <div class="row">
-        ×5 BET
-        <b>×5</b>
-      </div>
-
-      <div class="row">
-        ×10 BET
-        <b>×10</b>
-      </div>
-
-      <div class="row">
-        ×25 BET
-        <b>×25</b>
-      </div>
-
-      <div class="row">
-        +5.000 poin
-        <b>+</b>
-      </div>
-
-      <div class="row">
-        +10.000 poin
-        <b>+</b>
-      </div>
-
-      <div class="row">
-        +50.000 poin
-        <b>+</b>
-      </div>
-
-    </div>
-
-  </section>
+<div class="wheel-item" style="transform:rotate(337.5deg) translateY(-120px) rotate(-337.5deg)">
+<span>🪙<small>+1.000</small></span>
+</div>
 
 </div>
 
+<div class="wheel-center">SPIN</div>
 
-<footer>
-  Demo dengan poin virtual saja —
-  tanpa uang asli, deposit, penarikan,
-  atau hadiah uang.
-</footer>
+</div>
 
+<div class="wheel-result" id="wheelPrize">
+🎁 PUTAR RODA!
+</div>
+
+<div class="controls">
+
+<div class="row">
+<input class="input" id="wheelBet" type="number" min="100" value="1000">
+<input class="input" id="wheelBudget" type="number" min="1000" value="100000">
+</div>
+
+<button class="btn max-btn" onclick="maxWheelBet()">MAX BET</button>
+
+<button class="btn spin-btn" onclick="spinWheel()">
+🎡 PUTAR RODA
+</button>
+
+<button class="btn reset-btn" onclick="resetBalance()">
+RESET SALDO
+</button>
+
+</div>
+</div>
+
+<div class="paytable">
+
+<h2>🎁 HADIAH WHEEL</h2>
+
+<div class="reward"><span>💰 +1.000</span><b>HADIAH</b></div>
+<div class="reward"><span>💎 +2.500</span><b>HADIAH</b></div>
+<div class="reward"><span>🎁 +5.000</span><b>HADIAH</b></div>
+<div class="reward"><span>💰 +10.000</span><b>HADIAH</b></div>
+<div class="reward"><span>👑 +25.000</span><b>JACKPOT</b></div>
+
+</div>
+
+</section>
+
+</div>
+
+<div class="popup" id="popup">
+
+<div class="popup-box">
+
+<div class="popup-icon" id="popupIcon">🎉</div>
+
+<h2 class="popup-title" id="popupTitle">MENANG!</h2>
+
+<p class="popup-text" id="popupText">Hadiah virtual.</p>
+
+<button class="close-btn" onclick="closePopup()">
+LANJUT
+</button>
+
+</div>
+
+</div>
 
 <script>
 
-let money = 1000000;
+let balance=1000000;
+let spinning=false;
+let autoSpin=false;
+let autoTimer=null;
+let wheelRotation=0;
+let audio=null;
 
-let spent1 = 0;
-let spent2 = 0;
-
-let autoOn = false;
-let timer = null;
-
-
-/* SYMBOL SLOT */
-
-const sy = [
-  '🍒',
-  '🍀',
-  '⭐',
-  '💎',
-  '7️⃣',
-  '🔔',
-  '🎁',
-  '🍋',
-  '🍇',
-  '🎯'
+const symbols=[
+"🍒","🍋","🍇","🔔","💎",
+"⭐","🎯","7️⃣","🎁","🐟"
 ];
 
+const wheelRewards=[
+1000,2500,5000,10000,
+25000,5000,2500,1000
+];
 
-/* MULTIPLIER */
-
-const multi = {
-  '🍒':3,
-  '🍀':15,
-  '⭐':25,
-  '💎':50,
-  '7️⃣':100,
-  '🔔':8,
-  '🎁':200,
-  '🍋':5,
-  '🍇':10
-};
-
-
-/* FORMAT ANGKA */
-
-const F = n =>
-  new Intl.NumberFormat('id-ID').format(n);
-
-
-/* RANDOM SYMBOL */
-
-const R = () =>
-  sy[Math.floor(Math.random() * sy.length)];
-
-
-/* UPDATE SALDO */
-
-function upd(){
-
-  document.getElementById('bal').textContent =
-    F(money);
-
+function money(n){
+  return Number(n).toLocaleString("id-ID");
 }
 
-
-/* GANTI GAME */
-
-function game(n){
-
-  document
-    .querySelectorAll('.game')
-    .forEach(x =>
-      x.classList.remove('active')
-    );
-
-  document
-    .querySelectorAll('.tab')
-    .forEach(x =>
-      x.classList.remove('active')
-    );
-
-  document
-    .getElementById('g' + n)
-    .classList.add('active');
-
-  document
-    .querySelectorAll('.tab')[n - 1]
-    .classList.add('active');
-
+function updateBalance(){
+  document.getElementById("balance").textContent=money(balance);
 }
 
+function openGame(name){
 
-/* SLOT */
+  document.getElementById("home").style.display="none";
 
-function slot(){
-
-  let bet =
-    +document.getElementById('b1').value;
-
-  let bud =
-    +document.getElementById('u1').value;
-
-  if(bet < 100){
-
-    document.getElementById('r1').textContent =
-      'BET MINIMAL 100 POIN';
-
-    return;
-  }
-
-
-  if(bet > money){
-
-    document.getElementById('r1').textContent =
-      'SALDO VIRTUAL TIDAK CUKUP';
-
-    return;
-  }
-
-
-  if(spent1 + bet > bud){
-
-    document.getElementById('r1').textContent =
-      'BUDGET SESI TERCAPAI';
-
-    return;
-  }
-
-
-  money -= bet;
-
-  spent1 += bet;
-
-  upd();
-
-
-  let cells =
-    [
-      ...document.querySelectorAll(
-        '#reels .cell'
-      )
-    ];
-
-
-  cells.forEach(x =>
-    x.classList.add('spinanim')
-  );
-
-
-  let n = 0;
-
-
-  let t =
-    setInterval(() => {
-
-      cells.forEach(x =>
-        x.textContent = R()
-      );
-
-
-      n++;
-
-
-      if(n > 17){
-
-        clearInterval(t);
-
-        cells.forEach(x =>
-          x.classList.remove('spinanim')
-        );
-
-        finish(
-          cells,
-          bet,
-          bud
-        );
-
-      }
-
-    },80);
-
-}
-
-
-/* HASIL SLOT */
-
-function finish(c,bet,bud){
-
-  let v =
-    c.map(x => x.textContent);
-
-  let win = 0;
-
-
-  /*
-    3 BARIS
-  */
-
-  [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8]
-
-  ].forEach(a => {
-
-    if(
-      v[a[0]] == v[a[1]] &&
-      v[a[1]] == v[a[2]] &&
-      multi[v[a[0]]]
-    ){
-
-      win +=
-        bet * multi[v[a[0]]];
-
-    }
-
+  document.querySelectorAll(".game").forEach(g=>{
+    g.style.display="none";
   });
 
+  document.getElementById(name).style.display="block";
 
-  /*
-    SCATTER
-  */
-
-  let sc =
-    v.filter(x => x === '🎯').length;
-
-
-  if(sc >= 3){
-
-    win += 50000;
-
-  }
-  else if(sc == 2){
-
-    win += 5000;
-
-  }
-  else if(sc == 1){
-
-    win += 500;
-
-  }
-
-
-  money += win;
-
-  upd();
-
-
-  if(win){
-
-    document.getElementById('r1')
-      .textContent =
-      '🎉 MENANG +' +
-      F(win) +
-      ' POIN!';
-
-  }
-  else{
-
-    document.getElementById('r1')
-      .textContent =
-      'BELUM MENANG — COBA LAGI';
-
-  }
-
-
-  document.getElementById('s1')
-    .textContent =
-    'Budget terpakai: ' +
-    F(spent1) +
-    ' / ' +
-    F(bud);
-
-
-  if(spent1 >= bud){
-
-    stop();
-
-  }
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
+function goHome(){
 
-/* AUTO SPIN */
+  stopAuto();
 
-function auto(){
+  document.querySelectorAll(".game").forEach(g=>{
+    g.style.display="none";
+  });
 
-  if(autoOn){
+  document.getElementById("home").style.display="block";
 
-    stop();
-
-  }
-  else{
-
-    autoOn = true;
-
-    spent1 = 0;
-
-    document.getElementById('ab')
-      .textContent =
-      'AUTO: ON';
-
-
-    timer =
-      setInterval(
-        slot,
-        1300
-      );
-
-  }
-
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
+function createReels(){
 
-/* STOP AUTO */
+  const reels=document.getElementById("reels");
 
-function stop(){
+  reels.innerHTML="";
 
-  autoOn = false;
+  for(let i=0;i<15;i++){
 
-  clearInterval(timer);
+    const cell=document.createElement("div");
 
-  timer = null;
+    cell.className="cell";
 
-  document.getElementById('ab')
-    .textContent =
-    'AUTO: OFF';
+    cell.textContent=randomSymbol();
 
+    reels.appendChild(cell);
+  }
 }
 
+function randomSymbol(){
 
-/* WHEEL */
-
-function wheelSpin(){
-
-  let bet =
-    +document.getElementById('b2').value;
-
-  let bud =
-    +document.getElementById('u2').value;
-
-
-  if(bet < 100){
-
-    document.getElementById('r2')
-      .textContent =
-      'BET MINIMAL 100 POIN';
-
-    return;
-
-  }
-
-
-  if(bet > money){
-
-    document.getElementById('r2')
-      .textContent =
-      'SALDO VIRTUAL TIDAK CUKUP';
-
-    return;
-
-  }
-
-
-  if(spent2 + bet > bud){
-
-    document.getElementById('r2')
-      .textContent =
-      'BUDGET SESI TERCAPAI';
-
-    return;
-
-  }
-
-
-  money -= bet;
-
-  spent2 += bet;
-
-  upd();
-
-
-  const prizes = [
-    '+100',
-    '×3',
-    '×5',
-    '×10',
-    '×25',
-    '+5.000',
-    '+10.000',
-    '+50.000'
+  return symbols[
+    Math.floor(Math.random()*symbols.length)
   ];
-
-
-  let i =
-    Math.floor(
-      Math.random() * 8
-    );
-
-
-  document.getElementById('wheel')
-    .style.transform =
-      'rotate(' +
-      (
-        1440 +
-        i * 45 +
-        Math.random() * 25
-      ) +
-      'deg)';
-
-
-  setTimeout(() => {
-
-    let w;
-
-
-    if(prizes[i][0] === '×'){
-
-      w =
-        bet *
-        +prizes[i].slice(1);
-
-    }
-    else{
-
-      w =
-        +prizes[i]
-          .replace('+','')
-          .replaceAll('.','');
-
-    }
-
-
-    money += w;
-
-    upd();
-
-
-    document.getElementById('r2')
-      .textContent =
-      '🎉 +' +
-      F(w) +
-      ' POIN!';
-
-
-    document.getElementById('s2')
-      .textContent =
-      'Budget terpakai: ' +
-      F(spent2) +
-      ' / ' +
-      F(bud);
-
-  },4200);
-
 }
 
+createReels();
 
-/* RESET */
+function spinSlot(){
 
-function reset(){
+  if(spinning)return;
 
-  stop();
-
-  money = 1000000;
-
-  spent1 = 0;
-
-  spent2 = 0;
-
-  upd();
-
-
-  document.getElementById('r1')
-    .textContent =
-    'SALDO DIRESET';
-
-
-  document.getElementById('r2')
-    .textContent =
-    'SALDO DIRESET';
-
-
-  document.getElementById('s1')
-    .textContent = '';
-
-
-  document.getElementById('s2')
-    .textContent = '';
-
-}
-
-
-/* SUARA */
-
-function sound(){
-
-  alert(
-    'Suara dapat ditambahkan dengan file audio milik Anda. Browser HP biasanya memblokir autoplay sebelum ada interaksi.'
+  const bet=Number(
+    document.getElementById("slotBet").value
   );
 
+  const budget=Number(
+    document.getElementById("budget").value
+  );
+
+  if(!bet || bet<100){
+    alert("Bet minimal 100 poin virtual.");
+    return;
+  }
+
+  if(balance<bet){
+    alert("Saldo virtual tidak cukup.");
+    stopAuto();
+    return;
+  }
+
+  let used=Number(
+    document.getElementById("budgetUsed")
+    .textContent.replace(/\./g,"")
+  );
+
+  if(used+bet>budget){
+    alert("Budget sesi sudah mencapai batas.");
+    stopAuto();
+    return;
+  }
+
+  balance-=bet;
+  used+=bet;
+
+  updateBalance();
+
+  document.getElementById("budgetUsed")
+    .textContent=money(used);
+
+  document.getElementById("budgetShow")
+    .textContent=money(budget);
+
+  document.getElementById("totalBet")
+    .textContent=money(bet);
+
+  spinning=true;
+
+  const cells=document.querySelectorAll(".cell");
+
+  cells.forEach(c=>{
+    c.classList.remove("win");
+    c.classList.add("spin");
+  });
+
+  document.getElementById("slotMessage")
+    .textContent="🎰 SPINNING...";
+
+  playSpinSound();
+
+  let tick=0;
+
+  const timer=setInterval(()=>{
+
+    cells.forEach(c=>{
+      c.textContent=randomSymbol();
+    });
+
+    tick++;
+
+    if(tick>=18){
+
+      clearInterval(timer);
+
+      finishSlot(bet);
+    }
+
+  },90);
 }
 
+function finishSlot(bet){
 
-/* START */
+  const cells=document.querySelectorAll(".cell");
 
-upd();
+  cells.forEach(c=>{
+    c.classList.remove("spin");
+  });
 
-</script>
+  const chance=Math.random();
 
-</body>
-</html>
+  let reward=0;
+  let message="😅 COBA LAGI!";
+  let icon="🎁";
+  let jackpot=false;
+
+  if(chance<0.04){
+
+    cells.forEach(c=>{
+      c.textContent="7️⃣";
+      c.classList.add("win");
+    });
+
+    reward=bet*150;
+    message="👑 JACKPOT 777!";
+    icon="👑";
+    jackpot=true;
+
+  }else if(chance<0.10){
+
+    cells.forEach(c=>{
+      c.textContent="💎";
+      c.classList.add("win");
+    });
+
+    reward=bet*100;
+    message="💎 DIAMOND WIN!";
+    icon="💎";
+
+  }else if(chance<0.19){
+
+    cells.forEach(c=>{
+      c.textContent="⭐";
+      c.classList.add("win");
+    });
+
+    reward=bet*75;
+    message="⭐ STAR BONUS!";
+    icon="⭐";
+
+  }else if(chance<0.30){
+
+    cells.forEach(c=>{
+      c.textContent="🔔";
+      c.classList.add("win");
+    });
+
+    reward=bet*50;
+    message="🔔 BIG WIN!";
+    icon="🔔";
+
+  }else if(chance<0.43){
+
+    cells.forEach(c=>{
+      c.textContent="🍒";
+      c.classList.add("win");
+    });
+
+    reward=bet*25;
+    message="🍒 CHERRY WIN!";
+    icon="🍒";
+
+  }else if(chance<0.52){
+
+    cells.forEach(c=>{
+      c.textContent="🎁";
+      c.classList.add("win");
+    });
+
+    reward=10000;
+    message="🎁 HADIAH BONUS!
