@@ -2,7 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#08051c">
+
 <title>FISHING 777</title>
 
 <style>
@@ -10,6 +12,10 @@
   box-sizing:border-box;
   margin:0;
   padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
@@ -41,14 +47,17 @@ body:before{
   margin:auto;
   min-height:100vh;
   padding-bottom:50px;
+  position:relative;
 }
 
 .header{
   padding:25px 12px 20px;
   text-align:center;
   border-bottom:2px solid #ffd52e;
-  background:rgba(4,7,27,.9);
-  box-shadow:0 0 25px #642cff;
+  background:rgba(4,7,27,.88);
+  box-shadow:
+    0 0 20px #642cff,
+    0 0 45px rgba(93,31,255,.5);
 }
 
 .logo{
@@ -59,27 +68,35 @@ body:before{
     0 0 7px #fff,
     0 0 18px #ffd000,
     0 0 40px #ff7200;
+  animation:logoGlow 1.7s infinite alternate;
 }
+
+@keyframes logoGlow{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.3)}
+}
+
+/* SALDO */
 
 .balance{
   margin:22px 20px 15px;
   padding:17px 22px;
   border:2px solid #8a35ff;
   border-radius:25px;
-  background:rgba(8,3,28,.95);
+  background:rgba(8,3,28,.9);
   box-shadow:
     0 0 12px #742cff,
     inset 0 0 25px rgba(110,35,255,.25);
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:19px;
+  font-size:20px;
   font-weight:bold;
 }
 
 .balance strong{
   color:#ffd52e;
-  font-size:26px;
+  font-size:27px;
   text-shadow:0 0 12px #ffbd00;
 }
 
@@ -103,13 +120,20 @@ body:before{
   gap:18px;
 }
 
+/*
+   GAME CARD
+   Dibuat sebagai DIV biasa dan dikontrol
+   melalui addEventListener JavaScript.
+*/
+
 .game-card{
+  width:100%;
   min-height:225px;
   border:2px solid #813cff;
   border-radius:25px;
   padding:20px;
   background:
-    linear-gradient(145deg,#4c1389,#0c0525);
+    linear-gradient(145deg,rgba(76,19,137,.95),rgba(12,5,37,.98));
   box-shadow:
     0 0 15px #6926ff,
     inset 0 0 25px rgba(255,255,255,.05);
@@ -121,14 +145,14 @@ body:before{
 }
 
 .game-card:hover{
-  transform:translateY(-5px);
+  transform:translateY(-6px);
   box-shadow:
-    0 0 30px #9b4cff,
-    0 0 50px rgba(124,45,255,.5);
+    0 0 25px #8e42ff,
+    0 0 45px rgba(124,45,255,.5);
 }
 
 .game-card:active{
-  transform:scale(.96);
+  transform:scale(.97);
 }
 
 .game-icon{
@@ -143,8 +167,8 @@ body:before{
 }
 
 .game-card p{
+  margin-top:9px;
   color:#bbb;
-  margin-top:8px;
 }
 
 /* GAME */
@@ -154,20 +178,20 @@ body:before{
   padding:15px 20px;
 }
 
-.game.active{
-  display:block !important;
-}
-
 .back{
   border:0;
   padding:12px 20px;
   border-radius:14px;
   background:#32135f;
-  color:#fff;
+  color:white;
   font-size:16px;
   cursor:pointer;
   margin-bottom:15px;
   box-shadow:0 0 10px #5920a0;
+}
+
+.back:active{
+  transform:scale(.96);
 }
 
 .game-title{
@@ -178,70 +202,7 @@ body:before{
   margin-bottom:18px;
 }
 
-/* SLOT */
-
-.slot-box{
-  padding:20px;
-  border:3px solid #ffd52e;
-  border-radius:30px;
-  background:linear-gradient(145deg,#401080,#10051e);
-  box-shadow:
-    0 0 15px #ffd52e,
-    0 0 35px #752aff,
-    inset 0 0 35px rgba(113,30,255,.25);
-}
-
-.slot-machine{
-  padding:14px;
-  border-radius:20px;
-  background:#08030f;
-  border:3px solid #7531d6;
-  box-shadow:
-    inset 0 0 30px #321061,
-    0 0 15px #6c2cff;
-}
-
-.reels{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:7px;
-}
-
-.reel{
-  height:88px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  border-radius:10px;
-  background:linear-gradient(#1b0b31,#09040e);
-  border:2px solid #7c39df;
-  box-shadow:0 0 8px #6720c9;
-}
-
-.reel.spinning{
-  animation:spinLight .12s infinite alternate;
-}
-
-@keyframes spinLight{
-  from{
-    border-color:#7c39df;
-    box-shadow:0 0 8px #6720c9;
-  }
-  to{
-    border-color:#ffd52e;
-    box-shadow:0 0 20px #ffd52e;
-  }
-}
-
-.slot-message{
-  text-align:center;
-  min-height:45px;
-  margin:15px 0;
-  font-size:21px;
-  color:#ffd52e;
-  font-weight:bold;
-}
+/* CONTROLS */
 
 .controls{
   margin-top:18px;
@@ -265,25 +226,31 @@ label{
 input{
   width:100%;
   margin-top:6px;
-  padding:14px;
+  padding:15px;
   border-radius:13px;
   border:1px solid #7132bb;
   background:#07040e;
   color:white;
-  font-size:16px;
+  font-size:17px;
   outline:none;
+}
+
+input:focus{
+  border-color:#ffd52e;
+  box-shadow:0 0 10px #ffd52e;
 }
 
 .main-btn{
   width:100%;
   margin-top:13px;
-  padding:16px;
+  padding:17px;
   border:0;
   border-radius:15px;
   color:white;
-  font-size:18px;
+  font-size:19px;
   font-weight:bold;
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 .green{
@@ -301,10 +268,112 @@ input{
   box-shadow:0 0 10px #d51d55;
 }
 
+.main-btn:active{
+  transform:scale(.98);
+}
+
+.main-btn:disabled{
+  opacity:.5;
+}
+
 .info{
   text-align:center;
   margin-top:15px;
   color:#8df58b;
+}
+
+/* SLOT */
+
+.slot-box{
+  padding:20px;
+  border:3px solid #ffd52e;
+  border-radius:30px;
+  background:
+    linear-gradient(145deg,#401080,#10051e);
+  box-shadow:
+    0 0 15px #ffd52e,
+    0 0 35px #752aff,
+    inset 0 0 35px rgba(113,30,255,.25);
+  position:relative;
+  overflow:hidden;
+}
+
+.slot-box:after{
+  content:"";
+  position:absolute;
+  inset:-100%;
+  background:linear-gradient(
+    120deg,
+    transparent 45%,
+    rgba(255,255,255,.09) 50%,
+    transparent 55%
+  );
+  animation:shine 4s infinite;
+  pointer-events:none;
+}
+
+@keyframes shine{
+  0%{transform:translateX(-30%)}
+  50%{transform:translateX(30%)}
+  100%{transform:translateX(30%)}
+}
+
+.slot-machine{
+  padding:14px;
+  border-radius:20px;
+  background:#08030f;
+  border:3px solid #7531d6;
+  box-shadow:
+    inset 0 0 30px #321061,
+    0 0 15px #6c2cff;
+  position:relative;
+  z-index:2;
+}
+
+.reels{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:7px;
+}
+
+.reel{
+  height:95px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:45px;
+  border-radius:10px;
+  background:linear-gradient(#1b0b31,#09040e);
+  border:2px solid #7c39df;
+  box-shadow:0 0 8px #6720c9;
+  transition:.15s;
+}
+
+.reel.spinning{
+  animation:reelLight .12s infinite alternate;
+}
+
+@keyframes reelLight{
+  from{
+    border-color:#7c39df;
+    box-shadow:0 0 8px #6720c9;
+  }
+  to{
+    border-color:#ffd52e;
+    box-shadow:0 0 20px #ffd52e;
+  }
+}
+
+.slot-message{
+  text-align:center;
+  min-height:45px;
+  margin:15px 0;
+  font-size:22px;
+  color:#ffd52e;
+  font-weight:bold;
+  text-shadow:0 0 12px #ffb000;
+  position:relative;
+  z-index:3;
 }
 
 .paytable{
@@ -313,6 +382,7 @@ input{
   border-radius:25px;
   background:rgba(12,5,32,.9);
   border:1px solid #522181;
+  box-shadow:0 0 20px rgba(106,37,190,.3);
 }
 
 .paytable h2{
@@ -331,7 +401,9 @@ input{
 /* JACKPOT */
 
 .jackpot{
-  animation:jackpotFlash .18s infinite alternate;
+  animation:
+    jackpotFlash .18s infinite alternate,
+    jackpotShake .12s infinite;
 }
 
 @keyframes jackpotFlash{
@@ -342,10 +414,18 @@ input{
   }
   to{
     box-shadow:
-      0 0 40px #fff,
-      0 0 70px #ffd000,
-      0 0 110px #ff2600;
+      0 0 35px #fff,
+      0 0 65px #ffd000,
+      0 0 100px #ff2600;
   }
+}
+
+@keyframes jackpotShake{
+  0%{transform:translate(0)}
+  25%{transform:translate(3px,-2px)}
+  50%{transform:translate(-3px,2px)}
+  75%{transform:translate(2px,2px)}
+  100%{transform:translate(-2px,-2px)}
 }
 
 /* EXPLOSION */
@@ -357,7 +437,7 @@ input{
   width:20px;
   height:20px;
   pointer-events:none;
-  z-index:99999;
+  z-index:9999;
 }
 
 .particle{
@@ -388,10 +468,11 @@ input{
   border:3px solid #ffd52e;
   border-radius:30px;
   padding:22px 12px;
-  background:rgba(15,5,40,.95);
+  background:rgba(15,5,40,.92);
   box-shadow:
     0 0 12px #ffd52e,
-    0 0 35px #7b25ff;
+    0 0 35px #7b25ff,
+    inset 0 0 35px rgba(113,30,255,.25);
 }
 
 .wheel-area{
@@ -408,6 +489,9 @@ input{
   width:100%;
   height:100%;
   display:block;
+  filter:
+    drop-shadow(0 0 8px #ffd52e)
+    drop-shadow(0 0 22px #ff9f00);
 }
 
 .pointer{
@@ -430,10 +514,13 @@ input{
   text-align:center;
   min-height:45px;
   margin-top:10px;
-  font-size:22px;
+  font-size:24px;
   font-weight:bold;
   color:#ffd52e;
+  text-shadow:0 0 12px #ffb000;
 }
+
+/* MOBILE */
 
 @media(max-width:520px){
 
@@ -453,17 +540,25 @@ input{
     font-size:58px;
   }
 
+  .inputs{
+    grid-template-columns:1fr 1fr;
+  }
+
   .reel{
-    height:75px;
-    font-size:33px;
+    height:78px;
+    font-size:34px;
   }
 
   .balance{
-    font-size:16px;
+    font-size:17px;
   }
 
   .balance strong{
-    font-size:23px;
+    font-size:24px;
+  }
+
+  .game-title{
+    font-size:27px;
   }
 }
 </style>
@@ -483,7 +578,9 @@ input{
 </div>
 
 
-<!-- HOME -->
+<!-- =========================
+     HOME
+========================= -->
 
 <section id="home" class="home">
 
@@ -493,13 +590,24 @@ input{
 
   <div class="games">
 
-    <div class="game-card" id="slotMenu">
+    <div
+      class="game-card"
+      id="slotCard"
+      role="button"
+      tabindex="0"
+    >
       <div class="game-icon">🎰</div>
       <h2>SLOT 777</h2>
       <p>Classic 5 Reel</p>
     </div>
 
-    <div class="game-card" id="wheelMenu">
+
+    <div
+      class="game-card"
+      id="wheelCard"
+      role="button"
+      tabindex="0"
+    >
       <div class="game-icon">🎡</div>
       <h2>777 WHEEL</h2>
       <p>Lucky Prize Wheel</p>
@@ -510,11 +618,19 @@ input{
 </section>
 
 
-<!-- SLOT -->
+<!-- =========================
+     SLOT
+========================= -->
 
 <section id="slotGame" class="game">
 
-  <button class="back" id="slotBack">← HOME</button>
+  <button
+    type="button"
+    class="back"
+    id="slotBack"
+  >
+    ← HOME
+  </button>
 
   <div class="game-title">
     🎰 SLOT 777
@@ -524,7 +640,7 @@ input{
 
     <div class="slot-machine">
 
-      <div class="reels">
+      <div class="reels" id="reels">
 
         <div class="reel">🔔</div>
         <div class="reel">🍋</div>
@@ -548,51 +664,82 @@ input{
 
     </div>
 
+
     <div id="slotMessage" class="slot-message">
       🎁 SIAP BERMAIN!
     </div>
 
-    <div class="controls">
 
-      <div class="inputs">
+    <div class="inputs">
 
-        <div>
-          <label>BET / SPIN</label>
-          <input id="slotBet" type="number" value="1000" min="100">
-        </div>
-
-        <div>
-          <label>BUDGET SESI</label>
-          <input id="slotBudget" type="number" value="100000" min="1000">
-        </div>
-
+      <div>
+        <label>BET / SPIN</label>
+        <input
+          id="slotBet"
+          type="number"
+          value="1000"
+          min="100"
+        >
       </div>
 
-      <button class="main-btn purple" id="maxSlot">
-        MAX BET
-      </button>
-
-      <button class="main-btn green" id="spinSlotBtn">
-        🎰 SPIN
-      </button>
-
-      <button class="main-btn purple" id="autoBtn">
-        AUTO SPIN: OFF
-      </button>
-
-      <button class="main-btn red" id="resetSlot">
-        RESET SALDO
-      </button>
-
-      <div class="info">
-        Budget terpakai:
-        <span id="slotUsed">0</span> /
-        <span id="slotBudgetText">100.000</span>
+      <div>
+        <label>BUDGET SESI</label>
+        <input
+          id="slotBudget"
+          type="number"
+          value="100000"
+          min="1000"
+        >
       </div>
 
     </div>
 
+
+    <button
+      type="button"
+      id="maxSlotBtn"
+      class="main-btn purple"
+    >
+      MAX BET
+    </button>
+
+
+    <button
+      type="button"
+      id="slotSpinBtn"
+      class="main-btn green"
+    >
+      🎰 SPIN
+    </button>
+
+
+    <button
+      type="button"
+      id="autoBtn"
+      class="main-btn purple"
+    >
+      AUTO SPIN: OFF
+    </button>
+
+
+    <button
+      type="button"
+      id="resetSlotBtn"
+      class="main-btn red"
+    >
+      RESET SALDO
+    </button>
+
+
+    <div class="info">
+      Budget terpakai:
+      <span id="slotUsed">0</span>
+      /
+      <span id="slotBudgetText">100.000</span>
+    </div>
+
   </div>
+
 
   <div class="paytable">
 
@@ -628,15 +775,25 @@ input{
 </section>
 
 
-<!-- WHEEL -->
+<!-- =========================
+     WHEEL
+========================= -->
 
 <section id="wheelGame" class="game">
 
-  <button class="back" id="wheelBack">← HOME</button>
+  <button
+    type="button"
+    class="back"
+    id="wheelBack"
+  >
+    ← HOME
+  </button>
+
 
   <div class="game-title">
     🎡 FISHING 777 WHEEL
   </div>
+
 
   <div class="wheel-box">
 
@@ -647,14 +804,16 @@ input{
       <canvas
         id="wheelCanvas"
         width="700"
-        height="700">
-      </canvas>
+        height="700"
+      ></canvas>
 
     </div>
+
 
     <div id="wheelResult" class="wheel-result">
       🎁 PUTAR RODA!
     </div>
+
 
     <div class="controls">
 
@@ -662,31 +821,61 @@ input{
 
         <div>
           <label>BET / PUTAR</label>
-          <input id="wheelBet" type="number" value="1000" min="100">
+
+          <input
+            id="wheelBet"
+            type="number"
+            value="1000"
+            min="100"
+          >
         </div>
+
 
         <div>
           <label>BUDGET SESI</label>
-          <input id="wheelBudget" type="number" value="100000" min="1000">
+
+          <input
+            id="wheelBudget"
+            type="number"
+            value="100000"
+            min="1000"
+          >
         </div>
 
       </div>
 
-      <button class="main-btn purple" id="maxWheel">
+
+      <button
+        type="button"
+        id="maxWheelBtn"
+        class="main-btn purple"
+      >
         MAX BET
       </button>
 
-      <button class="main-btn green" id="spinWheelBtn">
+
+      <button
+        type="button"
+        id="wheelBtn"
+        class="main-btn green"
+      >
         🎡 PUTAR RODA
       </button>
 
-      <button class="main-btn red" id="resetWheel">
+
+      <button
+        type="button"
+        id="resetWheelBtn"
+        class="main-btn red"
+      >
         RESET SALDO
       </button>
 
+
       <div class="info">
         Budget terpakai:
-        <span id="wheelUsed">0</span> /
+        <span id="wheelUsed">0</span>
+        /
         <span id="wheelBudgetText">100.000</span>
       </div>
 
@@ -700,35 +889,70 @@ input{
 
 
 <script>
+
 /* =====================================================
-   SEMUA JAVASCRIPT DIMULAI SETELAH HTML SELESAI
+   SEMUA JAVASCRIPT DIJALANKAN SETELAH HTML SELESAI
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function(){
+
+  console.log("FISHING 777 berhasil dimuat");
+
+
+  /* ===================================================
+     DATA
+  =================================================== */
 
   let balance = 1000000;
 
   let slotUsed = 0;
   let wheelUsed = 0;
 
-  let spinningSlot = false;
-  let wheelSpinning = false;
-
   let autoSpin = false;
   let autoTimer = null;
 
-  const home = document.getElementById("home");
-  const slotGame = document.getElementById("slotGame");
-  const wheelGame = document.getElementById("wheelGame");
+  let spinningSlot = false;
+  let wheelSpinning = false;
 
-  const balanceEl = document.getElementById("balance");
 
-  function money(number){
-    return Math.floor(number).toLocaleString("id-ID");
+  /* ===================================================
+     ELEMENT
+  =================================================== */
+
+  const home =
+    document.getElementById("home");
+
+  const slotGame =
+    document.getElementById("slotGame");
+
+  const wheelGame =
+    document.getElementById("wheelGame");
+
+  const slotCard =
+    document.getElementById("slotCard");
+
+  const wheelCard =
+    document.getElementById("wheelCard");
+
+
+  /* ===================================================
+     FORMAT
+  =================================================== */
+
+  function formatMoney(number){
+
+    return Math.floor(number)
+      .toLocaleString("id-ID");
+
   }
 
+
   function updateBalance(){
-    balanceEl.textContent = money(balance);
+
+    document.getElementById("balance")
+      .textContent =
+      formatMoney(balance);
+
   }
 
 
@@ -745,20 +969,26 @@ document.addEventListener("DOMContentLoaded", function(){
     wheelGame.style.display = "none";
 
     window.scrollTo(0,0);
+
   }
 
 
   function showSlot(){
+
+    console.log("Membuka SLOT 777");
 
     home.style.display = "none";
     slotGame.style.display = "block";
     wheelGame.style.display = "none";
 
     window.scrollTo(0,0);
+
   }
 
 
   function showWheel(){
+
+    console.log("Membuka WHEEL");
 
     home.style.display = "none";
     slotGame.style.display = "none";
@@ -767,35 +997,72 @@ document.addEventListener("DOMContentLoaded", function(){
     drawWheel();
 
     window.scrollTo(0,0);
+
   }
 
 
   /* ===================================================
-     TOMBOL MENU
+     EVENT GAME CARD
   =================================================== */
 
-  document.getElementById("slotMenu")
-    .addEventListener("click", function(){
+  slotCard.addEventListener("click", function(){
+
+    showSlot();
+
+  });
+
+
+  wheelCard.addEventListener("click", function(){
+
+    showWheel();
+
+  });
+
+
+  /* Dukungan keyboard */
+
+  slotCard.addEventListener("keydown", function(event){
+
+    if(
+      event.key === "Enter" ||
+      event.key === " "
+    ){
+
+      event.preventDefault();
 
       showSlot();
 
-    });
+    }
+
+  });
 
 
-  document.getElementById("wheelMenu")
-    .addEventListener("click", function(){
+  wheelCard.addEventListener("keydown", function(event){
+
+    if(
+      event.key === "Enter" ||
+      event.key === " "
+    ){
+
+      event.preventDefault();
 
       showWheel();
 
-    });
+    }
+
+  });
 
 
-  document.getElementById("slotBack")
-    .addEventListener("click", showHome);
+  /* Tombol HOME */
+
+  document
+    .getElementById("slotBack")
+    .addEventListener("click",showHome);
 
 
-  document.getElementById("wheelBack")
-    .addEventListener("click", showHome);
+  document
+    .getElementById("wheelBack")
+    .addEventListener("click",showHome);
 
 
   /* ===================================================
@@ -804,69 +1071,116 @@ document.addEventListener("DOMContentLoaded", function(){
 
   let audioCtx = null;
 
+
   function initAudio(){
 
-    if(!audioCtx){
+    try{
 
-      const AudioContext =
-        window.AudioContext ||
-        window.webkitAudioContext;
+      if(!audioCtx){
 
-      if(!AudioContext) return;
+        const AudioContext =
+          window.AudioContext ||
+          window.webkitAudioContext;
 
-      audioCtx = new AudioContext();
+        if(!AudioContext) return;
 
-    }
+        audioCtx =
+          new AudioContext();
 
-    if(audioCtx.state === "suspended"){
-      audioCtx.resume();
+      }
+
+      if(audioCtx.state === "suspended"){
+
+        audioCtx.resume();
+
+      }
+
+    }catch(error){
+
+      console.log(
+        "Audio tidak tersedia:",
+        error
+      );
+
     }
 
   }
 
 
-  function tone(freq,duration,type,volume,delay){
+  function tone(
+    freq,
+    duration,
+    type="sine",
+    volume=.08,
+    delay=0
+  ){
 
     if(!audioCtx) return;
 
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
+    try{
 
-    osc.type = type || "sine";
+      const osc =
+        audioCtx.createOscillator();
 
-    const start =
-      audioCtx.currentTime + (delay || 0);
+      const gain =
+        audioCtx.createGain();
 
-    osc.frequency.setValueAtTime(freq,start);
+      const now =
+        audioCtx.currentTime;
 
-    gain.gain.setValueAtTime(.0001,start);
+      osc.type = type;
 
-    gain.gain.exponentialRampToValueAtTime(
-      volume || .06,
-      start+.01
-    );
+      osc.frequency.setValueAtTime(
+        freq,
+        now + delay
+      );
 
-    gain.gain.exponentialRampToValueAtTime(
-      .0001,
-      start+duration
-    );
+      gain.gain.setValueAtTime(
+        .0001,
+        now + delay
+      );
 
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
+      gain.gain.exponentialRampToValueAtTime(
+        volume,
+        now + delay + .01
+      );
 
-    osc.start(start);
-    osc.stop(start+duration+.03);
+      gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        now + delay + duration
+      );
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start(
+        now + delay
+      );
+
+      osc.stop(
+        now +
+        delay +
+        duration +
+        .03
+      );
+
+    }catch(error){
+
+      console.log("Tone error");
+
+    }
+
   }
 
 
-  function slotSound(){
+  function playSlotSpinSound(){
 
     initAudio();
 
     for(let i=0;i<12;i++){
 
       tone(
-        180+(i%4)*70,
+        160+(i%4)*65,
         .06,
         "square",
         .035,
@@ -874,339 +1188,90 @@ document.addEventListener("DOMContentLoaded", function(){
       );
 
     }
+
   }
 
 
-  function winSound(){
+  function playWinSound(){
 
     initAudio();
 
     tone(523,.13,"sine",.09,0);
     tone(659,.13,"sine",.09,.13);
-    tone(784,.16,"sine",.10,.26);
-    tone(1046,.25,"sine",.12,.42);
+    tone(784,.18,"sine",.11,.26);
+    tone(1046,.25,"sine",.12,.44);
 
   }
 
 
-  function jackpotSound(){
+  function playScatterSound(){
 
     initAudio();
 
-    tone(523,.12,"sawtooth",.08,0);
-    tone(659,.12,"sawtooth",.09,.12);
-    tone(784,.12,"sawtooth",.10,.24);
-    tone(1046,.16,"triangle",.11,.38);
-    tone(1318,.22,"triangle",.13,.56);
-    tone(1568,.35,"triangle",.14,.80);
-
-  }
-
-
-  function scatterSound(){
-
-    initAudio();
-
-    tone(330,.14,"triangle",.09,0);
-    tone(440,.14,"triangle",.09,.14);
-    tone(660,.16,"triangle",.11,.28);
+    tone(330,.15,"triangle",.10,0);
+    tone(440,.15,"triangle",.10,.14);
+    tone(660,.17,"triangle",.11,.28);
     tone(880,.28,"triangle",.13,.45);
 
   }
+
+
+  function playJackpotSound(){
+
+    initAudio();
+
+    tone(523,.14,"sawtooth",.09,0);
+    tone(659,.14,"sawtooth",.09,.14);
+    tone(784,.14,"sawtooth",.10,.28);
+    tone(1046,.18,"sawtooth",.11,.42);
+    tone(1318,.25,"triangle",.13,.62);
+    tone(1568,.35,"triangle",.14,.87);
+
+  }
+
+
+  function playWheelSound(){
+
+    initAudio();
+
+    for(let i=0;i<18;i++){
+
+      tone(
+        180+(i%5)*55,
+        .055,
+        "triangle",
+        .035,
+        i*.09
+      );
+
+    }
+
+  }
+
+
+  /* Aktifkan audio saat user menyentuh halaman */
+
+  document.addEventListener(
+    "pointerdown",
+    function(){
+
+      initAudio();
+
+    },
+    {once:true}
+  );
 
 
   /* ===================================================
      EXPLOSION
   =================================================== */
 
-  function explosion(){
+  function createExplosion(){
 
-    const box =
+    const container =
       document.createElement("div");
 
-    box.className="explosion";
+    container.className =
+      "explosion";
 
-    document.body.appendChild(box);
-
-    const icons=[
-      "💥",
-      "✨",
-      "💰",
-      "🎁",
-      "⭐",
-      "💎",
-      "🪙"
-    ];
-
-    for(let i=0;i<35;i++){
-
-      const p =
-        document.createElement("div");
-
-      p.className="particle";
-
-      p.textContent =
-        icons[
-          Math.floor(
-            Math.random()*icons.length
-          )
-        ];
-
-      const angle =
-        Math.random()*Math.PI*2;
-
-      const distance =
-        100+Math.random()*300;
-
-      p.style.setProperty(
-        "--x",
-        Math.cos(angle)*distance+"px"
-      );
-
-      p.style.setProperty(
-        "--y",
-        Math.sin(angle)*distance+"px"
-      );
-
-      box.appendChild(p);
-
-    }
-
-    setTimeout(function(){
-      box.remove();
-    },1700);
-
-  }
-
-
-  /* ===================================================
-     RESET
-  =================================================== */
-
-  function reset(){
-
-    balance=1000000;
-
-    slotUsed=0;
-    wheelUsed=0;
-
-    updateBalance();
-
-    document.getElementById("slotUsed")
-      .textContent=money(0);
-
-    document.getElementById("wheelUsed")
-      .textContent=money(0);
-
-    document.getElementById("slotMessage")
-      .textContent="🎁 SALDO DIRESET!";
-
-    document.getElementById("wheelResult")
-      .textContent="🎁 SALDO DIRESET!";
-
-  }
-
-
-  document.getElementById("resetSlot")
-    .addEventListener("click",reset);
-
-  document.getElementById("resetWheel")
-    .addEventListener("click",reset);
-
-
-  /* ===================================================
-     SLOT
-  =================================================== */
-
-  const symbols=[
-    "🍒",
-    "🍋",
-    "🍇",
-    "🔔",
-    "💎",
-    "⭐",
-    "🎯",
-    "7️⃣",
-    "🎁"
-  ];
-
-
-  function maxSlot(){
-
-    const budget =
-      Number(
-        document.getElementById("slotBudget").value
-      );
-
-    document.getElementById("slotBet").value =
-      Math.max(
-        100,
-        Math.min(balance,budget)
-      );
-
-  }
-
-
-  document.getElementById("maxSlot")
-    .addEventListener("click",maxSlot);
-
-
-  function spinSlot(){
-
-    initAudio();
-
-    if(spinningSlot) return;
-
-    const bet =
-      Math.floor(
-        Number(
-          document.getElementById("slotBet").value
-        )
-      );
-
-    const budget =
-      Math.floor(
-        Number(
-          document.getElementById("slotBudget").value
-        )
-      );
-
-    const message =
-      document.getElementById("slotMessage");
-
-
-    if(!bet || bet<100){
-
-      message.textContent =
-        "⚠️ Bet minimal 100 poin.";
-
-      return;
-    }
-
-
-    if(slotUsed+bet>budget){
-
-      message.textContent =
-        "⚠️ Budget sesi sudah habis.";
-
-      stopAuto();
-
-      return;
-    }
-
-
-    if(balance<bet){
-
-      message.textContent =
-        "⚠️ Saldo virtual tidak cukup.";
-
-      stopAuto();
-
-      return;
-    }
-
-
-    spinningSlot=true;
-
-    balance-=bet;
-    slotUsed+=bet;
-
-    updateBalance();
-
-    document.getElementById("slotUsed")
-      .textContent=money(slotUsed);
-
-    document.getElementById("slotBudgetText")
-      .textContent=money(budget);
-
-
-    const reels =
-      document.querySelectorAll(".reel");
-
-
-    reels.forEach(function(reel){
-      reel.classList.add("spinning");
-    });
-
-
-    message.textContent =
-      "🎰 REELS BERPUTAR...";
-
-
-    slotSound();
-
-
-    let tick=0;
-
-
-    const timer =
-      setInterval(function(){
-
-        reels.forEach(function(reel){
-
-          reel.textContent =
-            symbols[
-              Math.floor(
-                Math.random()*symbols.length
-              )
-            ];
-
-        });
-
-        tick++;
-
-        if(tick>=20){
-
-          clearInterval(timer);
-
-          reels.forEach(function(reel){
-            reel.classList.remove("spinning");
-          });
-
-          finishSlot(bet);
-
-        }
-
-      },70);
-
-  }
-
-
-  document.getElementById("spinSlotBtn")
-    .addEventListener("click",spinSlot);
-
-
-  function finishSlot(bet){
-
-    const reels =
-      document.querySelectorAll(".reel");
-
-    let result=[];
-
-    const chance=Math.random();
-
-
-    if(chance<.025){
-
-      result=[
-        "7️⃣","7️⃣","7️⃣","7️⃣","7️⃣",
-        "7️⃣","7️⃣","7️⃣","7️⃣","7️⃣",
-        "7️⃣","7️⃣","7️⃣","7️⃣","7️⃣"
-      ];
-
-    }
-
-    else if(chance<.08){
-
-      result=[
-        "🎁","🎁","🎁","🍋","⭐",
-        "🎁","🎁","🎁","🔔","🍇",
-        "🎁","💎","🎁","🍒","⭐"
-      ];
-
-    }
-
-    else if(chance<.13){
-
-      result=[
-        "💎","💎","💎","🍋",
+    document.body.
