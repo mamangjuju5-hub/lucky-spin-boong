@@ -6,16 +6,21 @@
 <title>FISHING 777</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   font-family:Arial,sans-serif;
-  color:#fff;
   min-height:100vh;
+  color:#fff;
   background:
-    radial-gradient(circle at 15% 10%,#244a86 0,transparent 28%),
-    radial-gradient(circle at 90% 20%,#50156c 0,transparent 28%),
-    linear-gradient(145deg,#04050d,#0b1024,#03040a);
+    radial-gradient(circle at 15% 10%,#153d78 0%,transparent 30%),
+    radial-gradient(circle at 90% 25%,#76198d 0%,transparent 35%),
+    radial-gradient(circle at 50% 100%,#26105e 0%,transparent 40%),
+    linear-gradient(135deg,#030514,#110622,#06182d);
   overflow-x:hidden;
 }
 
@@ -24,554 +29,515 @@ body:before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  background:
-    radial-gradient(circle at 20% 40%,rgba(0,180,255,.13),transparent 25%),
-    radial-gradient(circle at 80% 60%,rgba(255,0,180,.12),transparent 25%);
-  animation:bgPulse 5s infinite alternate;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.13) 1px,transparent 1px);
+  background-size:42px 42px;
+  opacity:.25;
 }
 
-@keyframes bgPulse{from{opacity:.4}to{opacity:1}}
-
 .app{
-  max-width:540px;
+  width:100%;
+  max-width:720px;
   margin:auto;
   min-height:100vh;
+  padding-bottom:50px;
   position:relative;
-  z-index:1;
 }
 
 .header{
-  padding:20px 12px;
+  padding:25px 12px 20px;
   text-align:center;
-  background:linear-gradient(180deg,#111b42,#070914);
-  border-bottom:2px solid #ffd52f;
-  box-shadow:0 0 12px #1684ff,0 0 35px rgba(255,210,30,.25);
+  border-bottom:2px solid #ffd52e;
+  background:rgba(4,7,27,.88);
+  box-shadow:
+    0 0 20px #642cff,
+    0 0 45px rgba(93,31,255,.5);
 }
 
 .logo{
-  font-size:34px;
+  font-size:38px;
   font-weight:900;
-  color:#ffd735;
-  text-shadow:0 0 5px white,0 0 14px #ffb300,0 0 30px #ff5e00;
+  color:#ffd52e;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 18px #ffd000,
+    0 0 40px #ff7200;
+  animation:logoGlow 1.7s infinite alternate;
+}
+
+@keyframes logoGlow{
+  from{filter:brightness(1)}
+  to{filter:brightness(1.3)}
 }
 
 .balance{
-  margin:17px 14px;
-  padding:16px 19px;
-  border-radius:20px;
-  border:2px solid #7132e8;
-  background:linear-gradient(90deg,#0e0920,#1b1035);
-  box-shadow:0 0 15px #6128db;
+  margin:22px 20px 15px;
+  padding:17px 22px;
+  border:2px solid #8a35ff;
+  border-radius:25px;
+  background:rgba(8,3,28,.9);
+  box-shadow:
+    0 0 12px #742cff,
+    inset 0 0 25px rgba(110,35,255,.25);
   display:flex;
   justify-content:space-between;
   align-items:center;
+  font-size:20px;
+  font-weight:bold;
 }
 
-.balance-title{font-weight:bold;font-size:18px}
-
-.money{
-  color:#ffd52f;
-  font-size:24px;
-  font-weight:900;
-  text-shadow:0 0 12px #ffae00;
+.balance strong{
+  color:#ffd52e;
+  font-size:27px;
+  text-shadow:0 0 12px #ffbd00;
 }
 
-.home{padding:10px 14px 40px}
+/* HOME */
 
-.hero{
-  padding:25px 15px;
+.home{
+  padding:20px;
+}
+
+.home-title{
   text-align:center;
-  border-radius:25px;
-  background:radial-gradient(circle at center,#213e70,#0d1228 65%);
-  border:2px solid #2586ff;
-  box-shadow:0 0 15px #197cff,inset 0 0 30px rgba(0,120,255,.16);
+  font-size:31px;
+  color:#ffd52e;
+  text-shadow:0 0 18px #ff9d00;
+  margin:25px 0;
 }
 
-.hero h1{
-  color:#ffd52f;
-  font-size:37px;
-  margin-bottom:8px;
-  text-shadow:0 0 8px white,0 0 20px #ffb000;
-}
-
-.hero p{color:#bac6e3;margin-bottom:24px}
-
-.game-grid{
+.games{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:13px;
+  gap:18px;
 }
 
 .game-card{
-  min-height:180px;
-  padding:17px 8px;
-  border-radius:22px;
-  background:linear-gradient(145deg,#29104e,#0c091b);
-  border:2px solid #7b34ff;
-  box-shadow:0 0 13px #6725e8;
+  min-height:225px;
+  border:2px solid #813cff;
+  border-radius:25px;
+  padding:20px;
+  background:
+    linear-gradient(145deg,rgba(76,19,137,.95),rgba(12,5,37,.98));
+  box-shadow:
+    0 0 15px #6926ff,
+    inset 0 0 25px rgba(255,255,255,.05);
   cursor:pointer;
-  text-align:center;
   transition:.2s;
+  text-align:center;
 }
 
 .game-card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 28px #8e4cff;
+  transform:translateY(-6px);
+  box-shadow:
+    0 0 25px #8e42ff,
+    0 0 45px rgba(124,45,255,.5);
+}
+
+.game-card:active{
+  transform:scale(.97);
 }
 
 .game-icon{
-  font-size:60px;
-  margin:13px 0;
-  filter:drop-shadow(0 0 10px #ffd52f);
+  font-size:72px;
+  margin:15px 0;
+  filter:drop-shadow(0 0 12px #ffd52e);
 }
 
-.game-card h2{color:#ffd735;font-size:19px}
-.game-card p{color:#aeb7d3;font-size:12px;margin-top:8px}
+.game-card h2{
+  color:#ffd52e;
+  text-shadow:0 0 8px #ff9d00;
+}
+
+.game-card p{
+  margin-top:9px;
+  color:#bbb;
+}
+
+/* GAME */
 
 .game{
   display:none;
-  padding:5px 14px 40px;
+  padding:15px 20px;
 }
 
 .back{
-  background:#28154b;
-  border:1px solid #6731a5;
+  border:0;
+  padding:12px 20px;
+  border-radius:14px;
+  background:#32135f;
   color:white;
-  padding:12px 18px;
-  border-radius:12px;
+  font-size:16px;
   cursor:pointer;
-  margin-bottom:10px;
+  margin-bottom:15px;
+  box-shadow:0 0 10px #5920a0;
 }
 
 .game-title{
   text-align:center;
-  color:#ffd735;
-  font-size:31px;
-  margin:7px 0 15px;
-  text-shadow:0 0 8px white,0 0 18px #ff9800;
+  font-size:30px;
+  color:#ffd52e;
+  text-shadow:0 0 18px #ff9700;
+  margin-bottom:18px;
+}
+
+/* CONTROLS */
+
+.controls{
+  margin-top:18px;
+  padding:18px;
+  border:2px solid #54228c;
+  border-radius:25px;
+  background:rgba(7,3,25,.92);
+}
+
+.inputs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+label{
+  color:#aaa;
+  font-size:14px;
+}
+
+input{
+  width:100%;
+  margin-top:6px;
+  padding:15px;
+  border-radius:13px;
+  border:1px solid #7132bb;
+  background:#07040e;
+  color:white;
+  font-size:17px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#ffd52e;
+  box-shadow:0 0 10px #ffd52e;
+}
+
+.main-btn{
+  width:100%;
+  margin-top:13px;
+  padding:17px;
+  border:0;
+  border-radius:15px;
+  color:white;
+  font-size:19px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.green{
+  background:linear-gradient(#51ff24,#13bd0b);
+  box-shadow:0 0 15px #29ed18;
+}
+
+.purple{
+  background:linear-gradient(#8c3cff,#5516cc);
+  box-shadow:0 0 15px #7d32ff;
+}
+
+.red{
+  background:#a71942;
+  box-shadow:0 0 10px #d51d55;
+}
+
+.main-btn:active{
+  transform:scale(.98);
+}
+
+.info{
+  text-align:center;
+  margin-top:15px;
+  color:#8df58b;
 }
 
 /* SLOT */
 
+.slot-box{
+  padding:20px;
+  border:3px solid #ffd52e;
+  border-radius:30px;
+  background:
+    linear-gradient(145deg,#401080,#10051e);
+  box-shadow:
+    0 0 15px #ffd52e,
+    0 0 35px #752aff,
+    inset 0 0 35px rgba(113,30,255,.25);
+  position:relative;
+  overflow:hidden;
+}
+
+.slot-box:after{
+  content:"";
+  position:absolute;
+  inset:-100%;
+  background:linear-gradient(
+    120deg,
+    transparent 45%,
+    rgba(255,255,255,.09) 50%,
+    transparent 55%
+  );
+  animation:shine 4s infinite;
+  pointer-events:none;
+}
+
+@keyframes shine{
+  0%{transform:translateX(-30%)}
+  50%{transform:translateX(30%)}
+  100%{transform:translateX(30%)}
+}
+
 .slot-machine{
-  padding:12px;
-  border-radius:28px;
-  background:linear-gradient(145deg,#3b1190,#110627);
-  border:4px solid #ffd02b;
-  box-shadow:0 0 10px #fff000,0 0 30px #ff8c00,inset 0 0 25px black;
+  padding:14px;
+  border-radius:20px;
+  background:#08030f;
+  border:3px solid #7531d6;
+  box-shadow:
+    inset 0 0 30px #321061,
+    0 0 15px #6c2cff;
+  position:relative;
+  z-index:2;
 }
 
 .reels{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:6px;
-  padding:8px;
-  background:#08040d;
-  border:2px solid #913dff;
-  border-radius:17px;
-  box-shadow:inset 0 0 22px #260054;
+  gap:7px;
 }
 
-.cell{
-  aspect-ratio:1;
+.reel{
+  height:95px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:34px;
+  font-size:45px;
   border-radius:10px;
-  background:linear-gradient(145deg,#171023,#07040d);
-  border:2px solid #6933cf;
-  box-shadow:inset 0 0 12px #260452;
+  background:linear-gradient(#1b0b31,#09040e);
+  border:2px solid #7c39df;
+  box-shadow:0 0 8px #6720c9;
+  transition:.15s;
 }
 
-.cell.spin{
-  animation:cellSpin .11s infinite alternate;
+.reel.spinning{
+  animation:reelLight .12s infinite alternate;
 }
 
-@keyframes cellSpin{
-  from{transform:translateY(-4px);filter:blur(1.5px)}
-  to{transform:translateY(4px);filter:blur(0)}
+@keyframes reelLight{
+  from{
+    border-color:#7c39df;
+    box-shadow:0 0 8px #6720c9;
+  }
+  to{
+    border-color:#ffd52e;
+    box-shadow:0 0 20px #ffd52e;
+  }
 }
 
-.cell.win{
-  animation:winFlash .35s infinite alternate;
-}
-
-@keyframes winFlash{
-  from{transform:scale(1);border-color:white;box-shadow:0 0 5px white}
-  to{transform:scale(1.09);border-color:#ffd900;box-shadow:0 0 15px #ffd900,0 0 30px #ff7700}
-}
-
-.win-message{
-  min-height:35px;
+.slot-message{
   text-align:center;
-  margin:12px 0;
-  color:#ffd735;
-  font-size:20px;
+  min-height:45px;
+  margin:15px 0;
+  font-size:22px;
+  color:#ffd52e;
   font-weight:bold;
-  text-shadow:0 0 13px #ff9000;
-}
-
-.stats{
-  display:flex;
-  justify-content:space-around;
-  text-align:center;
-  color:#ffd735;
-  margin-bottom:10px;
-}
-
-.stats b{display:block;font-size:18px}
-.stats small{color:#aaa}
-
-.controls{
-  margin-top:10px;
-  padding:13px;
-  border-radius:18px;
-  background:#100a20;
-  border:1px solid #522498;
-}
-
-.row{display:flex;gap:8px;margin-bottom:9px}
-
-.input{
-  width:100%;
-  padding:13px;
-  background:#07050d;
-  color:white;
-  border:1px solid #7436bd;
-  border-radius:11px;
-  font-size:16px;
-  outline:none;
-}
-
-.btn{
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:13px;
-  color:white;
-  font-weight:bold;
-  font-size:17px;
-  cursor:pointer;
-}
-
-.btn:active{transform:scale(.97)}
-
-.max-btn{
-  background:linear-gradient(180deg,#9141ff,#5112be);
-  margin-bottom:9px;
-}
-
-.spin-btn{
-  background:linear-gradient(180deg,#52ff32,#13a900);
-  color:#062500;
-  box-shadow:0 0 10px #35ff18,0 0 25px rgba(50,255,20,.35);
-}
-
-.auto-btn{background:#35205b;margin-top:9px}
-
-.auto-btn.active{
-  background:linear-gradient(180deg,#ffd52f,#e99800);
-  color:#241500;
-  box-shadow:0 0 20px #ffbd00;
-}
-
-.reset-btn{background:#9d193d;margin-top:9px}
-
-.budget-info{
-  text-align:center;
-  margin-top:10px;
-  color:#8fe58f;
-  font-size:13px;
+  text-shadow:0 0 12px #ffb000;
+  position:relative;
+  z-index:3;
 }
 
 .paytable{
-  margin-top:15px;
-  padding:17px;
-  border-radius:20px;
-  background:#100a20;
-  border:1px solid #54249b;
+  margin-top:20px;
+  padding:20px;
+  border-radius:25px;
+  background:rgba(12,5,32,.9);
+  border:1px solid #522181;
+  box-shadow:0 0 20px rgba(106,37,190,.3);
 }
 
 .paytable h2{
   text-align:center;
-  color:#ffd735;
-  margin-bottom:12px;
+  color:#ffd52e;
+  margin-bottom:15px;
 }
 
-.reward{
+.payrow{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  padding:9px 4px;
-  border-bottom:1px solid #2d2140;
+  padding:11px 5px;
+  border-bottom:1px solid #32204b;
 }
 
-.reward b{color:#ffd735}
+/* JACKPOT */
 
-/* WHEEL */
-
-.wheel-box{
-  padding:18px 10px 20px;
-  border-radius:25px;
-  background:radial-gradient(circle,#32136b,#0d081b);
-  border:3px solid #ffd02d;
-  box-shadow:0 0 12px #ffd02d,0 0 35px rgba(255,145,0,.5);
-}
-
-.wheel-wrap{
-  width:330px;
-  max-width:86vw;
-  aspect-ratio:1;
-  margin:5px auto 20px;
-  position:relative;
-}
-
-.pointer{
-  position:absolute;
-  z-index:10;
-  left:50%;
-  top:-9px;
-  transform:translateX(-50%);
-  font-size:34px;
-  color:white;
-  text-shadow:0 0 5px white,0 0 15px #00aaff;
-}
-
-.wheel{
-  width:100%;
-  height:100%;
-  position:relative;
-  border-radius:50%;
-  border:9px solid #ffd52f;
-  background:conic-gradient(
-    #e84242 0deg 45deg,
-    #7735d9 45deg 90deg,
-    #16a9a2 90deg 135deg,
-    #e9ad22 135deg 180deg,
-    #278ed0 180deg 225deg,
-    #a747c3 225deg 270deg,
-    #5aae63 270deg 315deg,
-    #ef7047 315deg 360deg
-  );
-  box-shadow:0 0 12px white,0 0 35px #ffae00,inset 0 0 18px rgba(0,0,0,.6);
-  transition:transform 4s cubic-bezier(.12,.75,.15,1);
-}
-
-.wheel-item{
-  position:absolute;
-  width:25%;
-  height:25%;
-  left:37.5%;
-  top:37.5%;
-  transform-origin:50% 50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:32px;
-  font-weight:bold;
-  pointer-events:none;
-}
-
-.wheel-item span{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  width:82px;
-  height:82px;
-  border-radius:50%;
-  background:rgba(0,0,0,.28);
-  text-shadow:0 0 5px white,0 0 12px #ffd000;
-}
-
-.wheel-item small{
-  font-size:9px;
-  color:white;
-  margin-top:2px;
-}
-
-.wheel-center{
-  position:absolute;
-  z-index:4;
-  width:78px;
-  height:78px;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  border-radius:50%;
-  background:#090611;
-  border:5px solid #ffd52f;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#ffd52f;
-  font-weight:900;
-  box-shadow:0 0 10px #ffd52f,0 0 25px #ff8000;
-}
-
-.wheel-result{
-  min-height:36px;
-  text-align:center;
-  color:#ffd735;
-  font-size:21px;
-  font-weight:bold;
-  text-shadow:0 0 12px #ff9900;
-  margin-bottom:10px;
-}
-
-/* POPUP */
-
-.popup{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.82);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-}
-
-.popup-box{
-  width:90%;
-  max-width:380px;
-  padding:28px 18px;
-  border-radius:25px;
-  text-align:center;
-  background:linear-gradient(145deg,#291052,#090611);
-  border:3px solid #ffd52f;
-  box-shadow:0 0 20px #ffd52f,0 0 45px #ff7500;
-  animation:popup .3s;
-}
-
-@keyframes popup{
-  from{transform:scale(.5);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-
-.popup-icon{font-size:65px}
-
-.popup-title{
-  color:#ffd735;
-  margin:10px 0;
-  font-size:27px;
-}
-
-.popup-text{color:#d2cbe0}
-
-.close-btn{
-  margin-top:18px;
-  padding:13px 35px;
-  border:0;
-  border-radius:12px;
-  background:#7130dc;
-  color:white;
-  font-weight:bold;
-}
-
-/* COIN */
-
-.coin{
-  position:fixed;
-  z-index:200;
-  pointer-events:none;
-  font-size:27px;
-  animation:coinFall 1.3s ease-out forwards;
-}
-
-@keyframes coinFall{
-  0%{transform:translateY(-20px) scale(.4) rotate(0);opacity:1}
-  100%{transform:translateY(280px) scale(1.2) rotate(360deg);opacity:0}
-}
-
-/* JACKPOT EXPLOSION */
-
-.jackpot-explosion{
-  position:fixed;
-  inset:0;
-  z-index:300;
-  pointer-events:none;
-  display:none;
-  overflow:hidden;
-}
-
-.jackpot-explosion.active{
-  display:block;
-  animation:jackpotFlash .8s ease-out;
+.jackpot{
+  animation:
+    jackpotFlash .18s infinite alternate,
+    jackpotShake .12s infinite;
 }
 
 @keyframes jackpotFlash{
-  0%{background:rgba(255,255,255,.9)}
-  15%{background:rgba(255,215,0,.35)}
-  100%{background:transparent}
+  from{
+    box-shadow:
+      0 0 15px #ffd52e,
+      0 0 30px #ff6500;
+  }
+  to{
+    box-shadow:
+      0 0 35px #fff,
+      0 0 65px #ffd000,
+      0 0 100px #ff2600;
+  }
 }
 
-.jackpot-text{
-  position:absolute;
+@keyframes jackpotShake{
+  0%{transform:translate(0)}
+  25%{transform:translate(3px,-2px)}
+  50%{transform:translate(-3px,2px)}
+  75%{transform:translate(2px,2px)}
+  100%{transform:translate(-2px,-2px)}
+}
+
+/* EXPLOSION */
+
+.explosion{
+  position:fixed;
   left:50%;
-  top:45%;
-  transform:translate(-50%,-50%) scale(.2);
-  font-size:52px;
-  font-weight:1000;
-  color:#ffd700;
-  text-align:center;
-  text-shadow:
-    0 0 5px white,
-    0 0 15px #ffd700,
-    0 0 35px #ff6500,
-    0 0 60px #ff0000;
-  white-space:nowrap;
-  animation:jackpotText 1.4s cubic-bezier(.15,.8,.2,1) forwards;
+  top:50%;
+  width:20px;
+  height:20px;
+  pointer-events:none;
+  z-index:9999;
 }
 
-@keyframes jackpotText{
-  0%{transform:translate(-50%,-50%) scale(.1) rotate(-8deg);opacity:0}
-  25%{transform:translate(-50%,-50%) scale(1.25) rotate(3deg);opacity:1}
-  50%{transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
-  100%{transform:translate(-50%,-50%) scale(1.15);opacity:0}
-}
-
-.explosion-particle{
+.particle{
   position:absolute;
-  left:50%;
-  top:45%;
+  left:0;
+  top:0;
   font-size:28px;
-  animation:explodeParticle 1.1s ease-out forwards;
+  animation:explode 1.4s forwards ease-out;
 }
 
-@keyframes explodeParticle{
+@keyframes explode{
   0%{
-    transform:translate(-50%,-50%) scale(.2);
+    transform:translate(0,0) scale(.3) rotate(0);
     opacity:1;
   }
   100%{
     transform:
-      translate(calc(-50% + var(--x)),calc(-50% + var(--y)))
-      scale(1.4)
+      translate(
+        var(--x),
+        var(--y)
+      )
+      scale(1.3)
       rotate(720deg);
     opacity:0;
   }
 }
 
-@media(max-width:420px){
-  .logo{font-size:30px}
-  .game-grid{grid-template-columns:1fr}
-  .game-card{min-height:160px}
-  .cell{font-size:28px}
-  .reels{gap:4px;padding:5px}
-  .wheel-item{font-size:27px}
-  .wheel-item span{width:66px;height:66px}
-  .wheel-item small{font-size:8px}
-  .jackpot-text{font-size:39px}
+/* WHEEL */
+
+.wheel-box{
+  border:3px solid #ffd52e;
+  border-radius:30px;
+  padding:22px 12px;
+  background:rgba(15,5,40,.92);
+  box-shadow:
+    0 0 12px #ffd52e,
+    0 0 35px #7b25ff,
+    inset 0 0 35px rgba(113,30,255,.25);
+}
+
+.wheel-area{
+  width:min(90vw,500px);
+  aspect-ratio:1;
+  margin:auto;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#wheelCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+  filter:
+    drop-shadow(0 0 8px #ffd52e)
+    drop-shadow(0 0 22px #ff9f00);
+}
+
+.pointer{
+  position:absolute;
+  top:-2px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:5;
+  width:0;
+  height:0;
+  border-left:18px solid transparent;
+  border-right:18px solid transparent;
+  border-top:35px solid white;
+  filter:
+    drop-shadow(0 0 5px white)
+    drop-shadow(0 0 10px #ffd52e);
+}
+
+.wheel-result{
+  text-align:center;
+  min-height:45px;
+  margin-top:10px;
+  font-size:24px;
+  font-weight:bold;
+  color:#ffd52e;
+  text-shadow:0 0 12px #ffb000;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:520px){
+
+  .logo{
+    font-size:31px;
+  }
+
+  .games{
+    grid-template-columns:1fr;
+  }
+
+  .game-card{
+    min-height:185px;
+  }
+
+  .game-icon{
+    font-size:58px;
+  }
+
+  .inputs{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .reel{
+    height:78px;
+    font-size:34px;
+  }
+
+  .balance{
+    font-size:17px;
+  }
+
+  .balance strong{
+    font-size:24px;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<div class="jackpot-explosion" id="jackpotExplosion">
-  <div class="jackpot-text">👑 JACKPOT 777! 👑</div>
-</div>
 
 <div class="app">
 
@@ -580,195 +546,233 @@ body:before{
 </header>
 
 <div class="balance">
-  <span class="balance-title">💰 SALDO VIRTUAL</span>
-  <span class="money" id="balance">1.000.000</span>
+  <span>💰 SALDO VIRTUAL</span>
+  <strong id="balance">1.000.000</strong>
 </div>
 
-<section class="home" id="home">
+<!-- =========================
+     HOME
+========================= -->
 
-  <div class="hero">
+<section id="home" class="home">
 
-    <h1>🎣 FISHING 777</h1>
-    <p>ARCADE SPIN • VIRTUAL DEMO</p>
+  <div class="home-title">
+    🎮 ARCADE GAME
+  </div>
 
-    <div class="game-grid">
+  <div class="games">
 
-      <div class="game-card" onclick="openGame('slot')">
-        <div class="game-icon">🎰</div>
-        <h2>SLOT 777</h2>
-        <p>5 Reel • Bonus • Jackpot</p>
-      </div>
+    <div class="game-card" onclick="openGame('slot')">
+      <div class="game-icon">🎰</div>
+      <h2>SLOT 777</h2>
+      <p>Classic 5 Reel</p>
+    </div>
 
-      <div class="game-card" onclick="openGame('wheel')">
-        <div class="game-icon">🎡</div>
-        <h2>LUCKY WHEEL</h2>
-        <p>Putar roda hadiah</p>
-      </div>
-
+    <div class="game-card" onclick="openGame('wheel')">
+      <div class="game-icon">🎡</div>
+      <h2>777 WHEEL</h2>
+      <p>Lucky Prize Wheel</p>
     </div>
 
   </div>
 
 </section>
 
-<section class="game" id="slot">
+
+<!-- =========================
+     SLOT GAME
+========================= -->
+
+<section id="slotGame" class="game">
 
 <button class="back" onclick="goHome()">← HOME</button>
 
-<h1 class="game-title">🎰 FISHING 777 SLOT</h1>
+<div class="game-title">🎰 SLOT 777</div>
+
+<div class="slot-box" id="slotBox">
 
 <div class="slot-machine">
 
-  <div class="reels" id="reels"></div>
+<div class="reels" id="reels">
 
-  <div class="win-message" id="slotMessage">
-    🎁 SIAP SPIN!
-  </div>
+<div class="reel">🔔</div>
+<div class="reel">🍋</div>
+<div class="reel">7️⃣</div>
+<div class="reel">🍇</div>
+<div class="reel">💎</div>
 
-  <div class="stats">
-    <div>
-      <b id="winAmount">0</b>
-      <small>WIN</small>
-    </div>
-    <div>
-      <b id="totalBet">1.000</b>
-      <small>BET</small>
-    </div>
-    <div>
-      <b>5</b>
-      <small>REEL</small>
-    </div>
-  </div>
+<div class="reel">🍒</div>
+<div class="reel">7️⃣</div>
+<div class="reel">🔔</div>
+<div class="reel">⭐</div>
+<div class="reel">🍋</div>
 
-  <div class="controls">
+<div class="reel">💎</div>
+<div class="reel">🍇</div>
+<div class="reel">🎯</div>
+<div class="reel">7️⃣</div>
+<div class="reel">🍒</div>
 
-    <div class="row">
-      <input class="input" id="slotBet" type="number" min="100" value="1000">
-      <input class="input" id="budget" type="number" min="1000" value="100000">
-    </div>
-
-    <button class="btn max-btn" onclick="maxBet()">MAX BET</button>
-
-    <button class="btn spin-btn" onclick="spinSlot()">
-      🎰 SPIN
-    </button>
-
-    <button class="btn auto-btn" id="autoButton" onclick="toggleAuto()">
-      AUTO SPIN: OFF
-    </button>
-
-    <button class="btn reset-btn" onclick="resetBalance()">
-      RESET SALDO
-    </button>
-
-    <div class="budget-info">
-      Budget sesi:
-      <span id="budgetUsed">0</span> /
-      <span id="budgetShow">100.000</span>
-    </div>
-
-  </div>
 </div>
+
+</div>
+
+<div id="slotMessage" class="slot-message">
+🎁 SIAP BERMAIN!
+</div>
+
+<div class="inputs">
+
+<div>
+<label>BET / SPIN</label>
+<input id="slotBet" type="number" value="1000" min="100">
+</div>
+
+<div>
+<label>BUDGET SESI</label>
+<input id="slotBudget" type="number" value="100000" min="1000">
+</div>
+
+</div>
+
+<button class="main-btn purple" onclick="maxBet()">
+MAX BET
+</button>
+
+<button id="slotSpinBtn"
+class="main-btn green"
+onclick="spinSlot()">
+🎰 SPIN
+</button>
+
+<button id="autoBtn"
+class="main-btn purple"
+onclick="toggleAuto()">
+AUTO SPIN: OFF
+</button>
+
+<button class="main-btn red" onclick="resetBalance()">
+RESET SALDO
+</button>
+
+<div class="info">
+Budget terpakai:
+<span id="slotUsed">0</span> /
+<span id="slotBudgetText">100.000</span>
+</div>
+
+</div>
+
 
 <div class="paytable">
 
-<h2>🎁 HADIAH VIRTUAL</h2>
+<h2>🏆 PAYTABLE DEMO</h2>
 
-<div class="reward"><span>7️⃣ 7️⃣ 7️⃣</span><b>x150</b></div>
-<div class="reward"><span>💎 💎 💎</span><b>x100</b></div>
-<div class="reward"><span>⭐ ⭐ ⭐</span><b>x75</b></div>
-<div class="reward"><span>🔔 🔔 🔔</span><b>x50</b></div>
-<div class="reward"><span>🍒 🍒 🍒</span><b>x25</b></div>
-<div class="reward"><span>🎁 🎁 🎁</span><b>+10.000</b></div>
+<div class="payrow">
+<span>7️⃣ 7️⃣ 7️⃣</span>
+<b>x450</b>
+</div>
+
+<div class="payrow">
+<span>💎 💎 💎</span>
+<b>x100</b>
+</div>
+
+<div class="payrow">
+<span>🔔 🔔 🔔</span>
+<b>x50</b>
+</div>
+
+<div class="payrow">
+<span>🍒 🍒 🍒</span>
+<b>x25</b>
+</div>
+
+<div class="payrow">
+<span>🎁 SCATTER x3</span>
+<b>x100</b>
+</div>
 
 </div>
+
 </section>
 
-<section class="game" id="wheel">
+
+<!-- =========================
+     WHEEL GAME
+========================= -->
+
+<section id="wheelGame" class="game">
 
 <button class="back" onclick="goHome()">← HOME</button>
 
-<h1 class="game-title">🎡 FISHING 777 WHEEL</h1>
+<div class="game-title">
+🎡 FISHING 777 WHEEL
+</div>
 
 <div class="wheel-box">
 
-<div class="wheel-wrap">
+<div class="wheel-area">
 
-<div class="pointer">▼</div>
+<div class="pointer"></div>
 
-<div class="wheel" id="wheelSpin">
-
-<div class="wheel-item" style="transform:rotate(22.5deg) translateY(-120px) rotate(-22.5deg)">
-<span>💰<small>+1.000</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(67.5deg) translateY(-120px) rotate(-67.5deg)">
-<span>💎<small>+2.500</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(112.5deg) translateY(-120px) rotate(-112.5deg)">
-<span>🎁<small>+5.000</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(157.5deg) translateY(-120px) rotate(-157.5deg)">
-<span>💰<small>+10.000</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(202.5deg) translateY(-120px) rotate(-202.5deg)">
-<span>👑<small>+25.000</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(247.5deg) translateY(-120px) rotate(-247.5deg)">
-<span>💎<small>+5.000</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(292.5deg) translateY(-120px) rotate(-292.5deg)">
-<span>🎁<small>+2.500</small></span>
-</div>
-
-<div class="wheel-item" style="transform:rotate(337.5deg) translateY(-120px) rotate(-337.5deg)">
-<span>🪙<small>+1.000</small></span>
-</div>
+<canvas
+id="wheelCanvas"
+width="700"
+height="700">
+</canvas>
 
 </div>
 
-<div class="wheel-center">SPIN</div>
-
-</div>
-
-<div class="wheel-result" id="wheelPrize">
+<div id="wheelResult" class="wheel-result">
 🎁 PUTAR RODA!
 </div>
 
 <div class="controls">
 
-<div class="row">
-<input class="input" id="wheelBet" type="number" min="100" value="1000">
-<input class="input" id="wheelBudget" type="number" min="1000" value="100000">
+<div class="inputs">
+
+<div>
+<label>BET / PUTAR</label>
+<input id="wheelBet"
+type="number"
+value="1000"
+min="100">
 </div>
 
-<button class="btn max-btn" onclick="maxWheelBet()">MAX BET</button>
+<div>
+<label>BUDGET SESI</label>
+<input id="wheelBudget"
+type="number"
+value="100000"
+min="1000">
+</div>
 
-<button class="btn spin-btn" onclick="spinWheel()">
+</div>
+
+<button class="main-btn purple"
+onclick="maxWheelBet()">
+MAX BET
+</button>
+
+<button id="wheelBtn"
+class="main-btn green"
+onclick="spinWheel()">
 🎡 PUTAR RODA
 </button>
 
-<button class="btn reset-btn" onclick="resetBalance()">
+<button class="main-btn red"
+onclick="resetBalance()">
 RESET SALDO
 </button>
 
+<div class="info">
+Budget terpakai:
+<span id="wheelUsed">0</span> /
+<span id="wheelBudgetText">100.000</span>
 </div>
+
 </div>
-
-<div class="paytable">
-
-<h2>🎁 HADIAH WHEEL</h2>
-
-<div class="reward"><span>💰 +1.000</span><b>HADIAH</b></div>
-<div class="reward"><span>💎 +2.500</span><b>HADIAH</b></div>
-<div class="reward"><span>🎁 +5.000</span><b>HADIAH</b></div>
-<div class="reward"><span>💰 +10.000</span><b>HADIAH</b></div>
-<div class="reward"><span>👑 +25.000</span><b>JACKPOT</b></div>
 
 </div>
 
@@ -776,263 +780,489 @@ RESET SALDO
 
 </div>
 
-<div class="popup" id="popup">
-
-<div class="popup-box">
-
-<div class="popup-icon" id="popupIcon">🎉</div>
-
-<h2 class="popup-title" id="popupTitle">MENANG!</h2>
-
-<p class="popup-text" id="popupText">Hadiah virtual.</p>
-
-<button class="close-btn" onclick="closePopup()">
-LANJUT
-</button>
-
-</div>
-
-</div>
 
 <script>
 
-let balance=1000000;
-let spinning=false;
-let autoSpin=false;
-let autoTimer=null;
-let wheelRotation=0;
-let audio=null;
+/* =====================================================
+   DATA
+===================================================== */
 
-const symbols=[
-"🍒","🍋","🍇","🔔","💎",
-"⭐","🎯","7️⃣","🎁","🐟"
-];
+let balance = 1000000;
 
-const wheelRewards=[
-1000,2500,5000,10000,
-25000,5000,2500,1000
-];
+let slotUsed = 0;
+let wheelUsed = 0;
 
-function money(n){
-  return Number(n).toLocaleString("id-ID");
+let autoSpin = false;
+let autoTimer = null;
+
+let spinningSlot = false;
+let wheelSpinning = false;
+
+
+/* =====================================================
+   FORMAT
+===================================================== */
+
+function formatMoney(n){
+  return Math.floor(n).toLocaleString("id-ID");
 }
 
 function updateBalance(){
-  document.getElementById("balance").textContent=money(balance);
+  document.getElementById("balance").textContent =
+    formatMoney(balance);
 }
 
-function openGame(name){
 
-  document.getElementById("home").style.display="none";
+/* =====================================================
+   AUDIO SYSTEM
+===================================================== */
 
-  document.querySelectorAll(".game").forEach(g=>{
-    g.style.display="none";
+let audioCtx = null;
+
+function initAudio(){
+
+  if(!audioCtx){
+
+    audioCtx =
+      new (window.AudioContext ||
+      window.webkitAudioContext)();
+
+  }
+
+  if(audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+}
+
+function tone(
+  freq,
+  duration,
+  type="sine",
+  volume=.08,
+  delay=0
+){
+
+  if(!audioCtx) return;
+
+  const osc =
+    audioCtx.createOscillator();
+
+  const gain =
+    audioCtx.createGain();
+
+  osc.type = type;
+
+  osc.frequency.setValueAtTime(
+    freq,
+    audioCtx.currentTime + delay
+  );
+
+  gain.gain.setValueAtTime(
+    .0001,
+    audioCtx.currentTime + delay
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    volume,
+    audioCtx.currentTime + delay + .01
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    .0001,
+    audioCtx.currentTime + delay + duration
+  );
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start(
+    audioCtx.currentTime + delay
+  );
+
+  osc.stop(
+    audioCtx.currentTime +
+    delay +
+    duration +
+    .03
+  );
+}
+
+
+/* =====================================================
+   SLOT SOUND
+===================================================== */
+
+function playSlotSpinSound(){
+
+  initAudio();
+
+  for(let i=0;i<12;i++){
+
+    tone(
+      160+(i%4)*65,
+      .06,
+      "square",
+      .035,
+      i*.08
+    );
+
+  }
+}
+
+function playWinSound(){
+
+  initAudio();
+
+  tone(523,.13,"sine",.09,0);
+  tone(659,.13,"sine",.09,.13);
+  tone(784,.18,"sine",.11,.26);
+  tone(1046,.25,"sine",.12,.44);
+
+}
+
+function playScatterSound(){
+
+  initAudio();
+
+  tone(330,.15,"triangle",.10,0);
+  tone(440,.15,"triangle",.10,.14);
+  tone(660,.17,"triangle",.11,.28);
+  tone(880,.28,"triangle",.13,.45);
+
+}
+
+function playJackpotSound(){
+
+  initAudio();
+
+  tone(523,.14,"sawtooth",.09,0);
+  tone(659,.14,"sawtooth",.09,.14);
+  tone(784,.14,"sawtooth",.10,.28);
+  tone(1046,.18,"sawtooth",.11,.42);
+  tone(1318,.25,"triangle",.13,.62);
+  tone(1568,.35,"triangle",.14,.87);
+
+  setTimeout(()=>{
+    explosionSound();
+  },800);
+
+}
+
+
+/* =====================================================
+   EXPLOSION SOUND
+===================================================== */
+
+function explosionSound(){
+
+  if(!audioCtx) return;
+
+  const duration=.55;
+
+  const buffer =
+    audioCtx.createBuffer(
+      1,
+      audioCtx.sampleRate*duration,
+      audioCtx.sampleRate
+    );
+
+  const data =
+    buffer.getChannelData(0);
+
+  for(let i=0;i<data.length;i++){
+
+    const decay =
+      1-(i/data.length);
+
+    data[i] =
+      (Math.random()*2-1) *
+      decay *
+      decay;
+
+  }
+
+  const source =
+    audioCtx.createBufferSource();
+
+  const gain =
+    audioCtx.createGain();
+
+  source.buffer=buffer;
+
+  gain.gain.setValueAtTime(
+    .32,
+    audioCtx.currentTime
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    .001,
+    audioCtx.currentTime+duration
+  );
+
+  source.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  source.start();
+}
+
+
+/* =====================================================
+   VISUAL EXPLOSION
+===================================================== */
+
+function createExplosion(){
+
+  const container =
+    document.createElement("div");
+
+  container.className="explosion";
+
+  document.body.appendChild(container);
+
+  const icons=[
+    "💥",
+    "✨",
+    "💰",
+    "🎁",
+    "⭐",
+    "💎",
+    "🪙"
+  ];
+
+  for(let i=0;i<35;i++){
+
+    const p =
+      document.createElement("div");
+
+    p.className="particle";
+
+    p.textContent =
+      icons[
+        Math.floor(
+          Math.random()*icons.length
+        )
+      ];
+
+    const angle =
+      Math.random()*Math.PI*2;
+
+    const distance =
+      100+Math.random()*300;
+
+    const x =
+      Math.cos(angle)*distance;
+
+    const y =
+      Math.sin(angle)*distance;
+
+    p.style.setProperty(
+      "--x",
+      x+"px"
+    );
+
+    p.style.setProperty(
+      "--y",
+      y+"px"
+    );
+
+    p.style.animationDelay =
+      Math.random()*.15+"s";
+
+    container.appendChild(p);
+  }
+
+  setTimeout(()=>{
+    container.remove();
+  },1700);
+}
+
+
+/* =====================================================
+   ENABLE AUDIO
+===================================================== */
+
+document.addEventListener(
+  "pointerdown",
+  ()=>{
+    initAudio();
+  },
+  {once:true}
+);
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function openGame(game){
+
+  document.getElementById("home")
+    .style.display="none";
+
+  document.getElementById("slotGame")
+    .style.display="none";
+
+  document.getElementById("wheelGame")
+    .style.display="none";
+
+  if(game==="slot"){
+
+    document.getElementById("slotGame")
+      .style.display="block";
+
+  }
+
+  if(game==="wheel"){
+
+    document.getElementById("wheelGame")
+      .style.display="block";
+
+    drawWheel();
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
-
-  document.getElementById(name).style.display="block";
-
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function goHome(){
 
   stopAuto();
 
-  document.querySelectorAll(".game").forEach(g=>{
-    g.style.display="none";
+  document.getElementById("slotGame")
+    .style.display="none";
+
+  document.getElementById("wheelGame")
+    .style.display="none";
+
+  document.getElementById("home")
+    .style.display="block";
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
-
-  document.getElementById("home").style.display="block";
-
-  window.scrollTo({top:0,behavior:"smooth"});
 }
 
-function createReels(){
 
-  const reels=document.getElementById("reels");
+/* =====================================================
+   RESET
+===================================================== */
 
-  reels.innerHTML="";
+function resetBalance(){
 
-  for(let i=0;i<15;i++){
+  balance=1000000;
 
-    const cell=document.createElement("div");
+  slotUsed=0;
+  wheelUsed=0;
 
-    cell.className="cell";
+  document.getElementById("slotUsed")
+    .textContent=formatMoney(slotUsed);
 
-    cell.textContent=randomSymbol();
+  document.getElementById("wheelUsed")
+    .textContent=formatMoney(wheelUsed);
 
-    reels.appendChild(cell);
-  }
+  updateBalance();
+
+  document.getElementById("slotMessage")
+    .textContent="🎁 SALDO DIRESET!";
+
+  document.getElementById("wheelResult")
+    .textContent="🎁 SALDO DIRESET!";
+
 }
 
-function randomSymbol(){
 
-  return symbols[
-    Math.floor(Math.random()*symbols.length)
-  ];
+/* =====================================================
+   SLOT 777
+===================================================== */
+
+const symbols=[
+  "🍒",
+  "🍋",
+  "🍇",
+  "🔔",
+  "💎",
+  "⭐",
+  "🎯",
+  "7️⃣",
+  "🎁"
+];
+
+function maxBet(){
+
+  const budget =
+    Number(
+      document.getElementById("slotBudget").value
+    );
+
+  document.getElementById("slotBet").value =
+    Math.max(
+      100,
+      Math.min(balance,budget)
+    );
 }
 
-createReels();
 
 function spinSlot(){
 
-  if(spinning)return;
+  initAudio();
 
-  const bet=Number(
-    document.getElementById("slotBet").value
-  );
+  if(spinningSlot) return;
 
-  const budget=Number(
-    document.getElementById("budget").value
-  );
+  const bet =
+    Math.floor(
+      Number(
+        document.getElementById("slotBet").value
+      )
+    );
+
+  const budget =
+    Math.floor(
+      Number(
+        document.getElementById("slotBudget").value
+      )
+    );
 
   if(!bet || bet<100){
-    alert("Bet minimal 100 poin virtual.");
+
+    document.getElementById("slotMessage")
+      .textContent="⚠️ Bet minimal 100 poin.";
+
+    return;
+  }
+
+  if(slotUsed+bet>budget){
+
+    document.getElementById("slotMessage")
+      .textContent="⚠️ Budget sesi sudah habis.";
+
+    stopAuto();
+
     return;
   }
 
   if(balance<bet){
-    alert("Saldo virtual tidak cukup.");
+
+    document.getElementById("slotMessage")
+      .textContent="⚠️ Saldo virtual tidak cukup.";
+
     stopAuto();
+
     return;
   }
 
-  let used=Number(
-    document.getElementById("budgetUsed")
-    .textContent.replace(/\./g,"")
-  );
-
-  if(used+bet>budget){
-    alert("Budget sesi sudah mencapai batas.");
-    stopAuto();
-    return;
-  }
+  spinningSlot=true;
 
   balance-=bet;
-  used+=bet;
+  slotUsed+=bet;
 
   updateBalance();
 
-  document.getElementById("budgetUsed")
-    .textContent=money(used);
+  document.getElementById("slotUsed")
+    .textContent=formatMoney(slotUsed);
 
-  document.getElementById("budgetShow")
-    .textContent=money(budget);
-
-  document.getElementById("totalBet")
-    .textContent=money(bet);
-
-  spinning=true;
-
-  const cells=document.querySelectorAll(".cell");
-
-  cells.forEach(c=>{
-    c.classList.remove("win");
-    c.classList.add("spin");
-  });
-
-  document.getElementById("slotMessage")
-    .textContent="🎰 SPINNING...";
-
-  playSpinSound();
-
-  let tick=0;
-
-  const timer=setInterval(()=>{
-
-    cells.forEach(c=>{
-      c.textContent=randomSymbol();
-    });
-
-    tick++;
-
-    if(tick>=18){
-
-      clearInterval(timer);
-
-      finishSlot(bet);
-    }
-
-  },90);
-}
-
-function finishSlot(bet){
-
-  const cells=document.querySelectorAll(".cell");
-
-  cells.forEach(c=>{
-    c.classList.remove("spin");
-  });
-
-  const chance=Math.random();
-
-  let reward=0;
-  let message="😅 COBA LAGI!";
-  let icon="🎁";
-  let jackpot=false;
-
-  if(chance<0.04){
-
-    cells.forEach(c=>{
-      c.textContent="7️⃣";
-      c.classList.add("win");
-    });
-
-    reward=bet*150;
-    message="👑 JACKPOT 777!";
-    icon="👑";
-    jackpot=true;
-
-  }else if(chance<0.10){
-
-    cells.forEach(c=>{
-      c.textContent="💎";
-      c.classList.add("win");
-    });
-
-    reward=bet*100;
-    message="💎 DIAMOND WIN!";
-    icon="💎";
-
-  }else if(chance<0.19){
-
-    cells.forEach(c=>{
-      c.textContent="⭐";
-      c.classList.add("win");
-    });
-
-    reward=bet*75;
-    message="⭐ STAR BONUS!";
-    icon="⭐";
-
-  }else if(chance<0.30){
-
-    cells.forEach(c=>{
-      c.textContent="🔔";
-      c.classList.add("win");
-    });
-
-    reward=bet*50;
-    message="🔔 BIG WIN!";
-    icon="🔔";
-
-  }else if(chance<0.43){
-
-    cells.forEach(c=>{
-      c.textContent="🍒";
-      c.classList.add("win");
-    });
-
-    reward=bet*25;
-    message="🍒 CHERRY WIN!";
-    icon="🍒";
-
-  }else if(chance<0.52){
-
-    cells.forEach(c=>{
-      c.textContent="🎁";
-      c.classList.add("win");
-    });
-
-    reward=10000;
-    message="🎁 HADIAH BONUS!
+  document.getElementById("slotBudgetText")
+  
